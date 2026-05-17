@@ -1,0 +1,47 @@
+---
+import { profile } from "../data";
+---
+
+<section class="hb-theme hb-theme--liquid-signal hb-hero" aria-labelledby="hero-title">
+  <p class="hb-badge">{profile.alias}</p>
+  <div class="hero-grid">
+    <div class="hb-stack">
+      <p class="hb-eyebrow">{profile.role}</p>
+      <h1 id="hero-title" class="hb-title">{profile.name}</h1>
+      <p class="hero-headline">{profile.headline}</p>
+      <p class="hb-copy">{profile.summary}</p>
+    </div>
+
+    <nav class="hb-row hero-links" aria-label="Primary links">
+      <a class="hb-button hb-button--secondary" href={profile.links.linkedin}>LinkedIn</a>
+      <a class="hb-button hb-button--secondary" href={profile.links.github}>GitHub</a>
+      <a class="hb-button hb-button--secondary" href={profile.links.email}>Contact</a>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .hero-grid {
+    display: grid;
+    gap: var(--hb-space-8);
+  }
+
+  .hero-headline {
+    max-width: 16ch;
+    margin: 0;
+    color: var(--hb-text);
+    font: 800 clamp(1.6rem, 5vw, 3.8rem) / 0.95 var(--hb-font-display);
+    letter-spacing: -0.055em;
+  }
+
+  .hero-links {
+    align-items: end;
+  }
+
+  @media (min-width: 56rem) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+    }
+  }
+</style>
