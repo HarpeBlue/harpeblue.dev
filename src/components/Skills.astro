@@ -9,10 +9,10 @@ const { content } = Astro.props;
 const skills = content.skills;
 ---
 
-<section class="hb-theme hb-theme--fresh-utility skills" aria-labelledby="skills-title">
+<section class="hb-theme hb-theme--liquid-signal portfolio-section skills" aria-labelledby="skills-title">
   <div class="hb-hero">
     <p class="hb-eyebrow">{skills.eyebrow}</p>
-    <h2 id="skills-title" class="hb-title">{skills.title}</h2>
+    <h2 id="skills-title" class="portfolio-section-title">{skills.title}</h2>
     <p class="hb-copy">{skills.description}</p>
   </div>
 
@@ -31,11 +31,3 @@ const skills = content.skills;
     }
   </div>
 </section>
-
-<style>
-  .skills {
-    display: grid;
-    gap: var(--hb-space-8);
-    margin-block: var(--hb-space-12);
-  }
-</style>

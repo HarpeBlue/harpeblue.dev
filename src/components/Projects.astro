@@ -9,10 +9,10 @@ const { content } = Astro.props;
 const projects = content.projects;
 ---
 
-<section class="hb-theme hb-theme--terminal-lab projects" aria-labelledby="projects-title">
+<section class="hb-theme hb-theme--terminal-lab portfolio-section projects" aria-labelledby="projects-title">
   <div class="hb-hero">
     <p class="hb-eyebrow">{projects.eyebrow}</p>
-    <h2 id="projects-title" class="hb-title">{projects.title}</h2>
+    <h2 id="projects-title" class="portfolio-section-title">{projects.title}</h2>
     <p class="hb-copy">{projects.description}</p>
   </div>
 
@@ -52,12 +52,6 @@ const projects = content.projects;
 </section>
 
 <style>
-  .projects {
-    display: grid;
-    gap: var(--hb-space-8);
-    margin-block: var(--hb-space-12);
-  }
-
   .project-card {
     align-content: start;
   }

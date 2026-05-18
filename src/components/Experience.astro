@@ -9,10 +9,10 @@ const { content } = Astro.props;
 const experience = content.experience;
 ---
 
-<section class="hb-theme hb-theme--fresh-utility experience" aria-labelledby="experience-title">
+<section class="hb-theme hb-theme--liquid-signal portfolio-section experience" aria-labelledby="experience-title">
   <div class="hb-hero">
     <p class="hb-eyebrow">{experience.eyebrow}</p>
-    <h2 id="experience-title" class="hb-title">{experience.title}</h2>
+    <h2 id="experience-title" class="portfolio-section-title">{experience.title}</h2>
     <p class="hb-copy">{experience.description}</p>
   </div>
 
@@ -52,12 +52,6 @@ const experience = content.experience;
 </section>
 
 <style>
-  .experience {
-    display: grid;
-    gap: var(--hb-space-8);
-    margin-block: var(--hb-space-12);
-  }
-
   .experience-card__header {
     display: flex;
     flex-wrap: wrap;
