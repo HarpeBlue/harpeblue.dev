@@ -1,0 +1,32 @@
+---
+import { profile } from "../data";
+---
+
+<section class="hb-theme hb-theme--rave-mode contact-cta" aria-labelledby="contact-title">
+  <div class="hb-hero contact-cta__content">
+    <div class="hb-stack">
+      <p class="hb-eyebrow">Contact</p>
+      <h2 id="contact-title" class="hb-title">Let's build something fast and memorable.</h2>
+      <p class="hb-copy">
+        Open to remote Frontend Software Engineer roles focused on React, product UI,
+        design systems, testing, and AI-assisted engineering workflows.
+      </p>
+    </div>
+
+    <nav class="hb-row" aria-label="Contact links">
+      <a class="hb-button hb-button--secondary" href={profile.links.email}>Email</a>
+      <a class="hb-button hb-button--secondary" href={profile.links.linkedin}>LinkedIn</a>
+      <a class="hb-button hb-button--secondary" href={profile.links.github}>GitHub</a>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .contact-cta {
+    margin-block: var(--hb-space-12);
+  }
+
+  .contact-cta__content {
+    gap: var(--hb-space-8);
+  }
+</style>

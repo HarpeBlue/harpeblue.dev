@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactCta from "../components/ContactCta.astro";
 import Experience from "../components/Experience.astro";
 import Hero from "../components/Hero.astro";
 import Projects from "../components/Projects.astro";
@@ -16,6 +17,7 @@ const title = `${profile.name} - ${profile.role}`;
       <Experience />
       <Projects />
       <Skills />
+      <ContactCta />
     </div>
   </main>
 </BaseLayout>
