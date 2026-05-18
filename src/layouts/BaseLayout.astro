@@ -4,11 +4,21 @@ type Props = {
   description: string;
   lang?: string;
   canonical?: string;
+  alternates?: Array<{
+    hrefLang: string;
+    href: string;
+  }>;
 };
 
 import "../styles/global.css";
 
-const { title, description, lang = "en", canonical = "https://harpeblue.dev/" } = Astro.props;
+const {
+  title,
+  description,
+  lang = "en",
+  canonical = "https://harpeblue.dev/",
+  alternates = [],
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -21,6 +31,7 @@ const { title, description, lang = "en", canonical = "https://harpeblue.dev/" } 
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((alternate) => <link rel="alternate" hreflang={alternate.hrefLang} href={alternate.href} />)}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

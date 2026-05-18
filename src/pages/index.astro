@@ -11,7 +11,16 @@ import { content } from "../data";
 const page = content.en;
 ---
 
-<BaseLayout title={page.seo.title} description={page.seo.description} lang={page.locale}>
+<BaseLayout
+  title={page.seo.title}
+  description={page.seo.description}
+  lang={page.locale}
+  alternates={[
+    { hrefLang: "en", href: "https://harpeblue.dev/" },
+    { hrefLang: "es", href: "https://harpeblue.dev/es/" },
+    { hrefLang: "x-default", href: "https://harpeblue.dev/" },
+  ]}
+>
   <main class="hb-shell">
     <div class="hb-page">
       <LanguageSwitch content={page} />
