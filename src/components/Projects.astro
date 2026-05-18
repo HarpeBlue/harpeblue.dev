@@ -1,20 +1,24 @@
 ---
-import { projects } from "../data";
+import type { PageContent } from "../data/content";
+
+type Props = {
+  content: PageContent;
+};
+
+const { content } = Astro.props;
+const projects = content.projects;
 ---
 
 <section class="hb-theme hb-theme--terminal-lab projects" aria-labelledby="projects-title">
   <div class="hb-hero">
-    <p class="hb-eyebrow">Selected work</p>
-    <h2 id="projects-title" class="hb-title">Projects with proof</h2>
-    <p class="hb-copy">
-      A small set of projects that show frontend execution, visual systems,
-      documentation, and practical developer workflows.
-    </p>
+    <p class="hb-eyebrow">{projects.eyebrow}</p>
+    <h2 id="projects-title" class="hb-title">{projects.title}</h2>
+    <p class="hb-copy">{projects.description}</p>
   </div>
 
   <div class="hb-grid">
     {
-      projects.map((project) => (
+      projects.items.map((project) => (
         <article class="hb-card hb-card--accent hb-stack project-card">
           <header class="project-card__header">
             <div>
@@ -31,15 +35,15 @@ import { projects } from "../data";
             ))}
           </ul>
 
-          <div class="hb-row" aria-label={`${project.name} technologies`}>
+          <div class="hb-row" aria-label={`${project.name} ${projects.technologiesLabel}`}>
             {project.technologies.map((technology) => (
               <span class="hb-badge">{technology}</span>
             ))}
           </div>
 
-          <nav class="hb-row" aria-label={`${project.name} links`}>
-            <a class="hb-button hb-button--secondary" href={project.repositoryUrl}>Repository</a>
-            <a class="hb-button hb-button--secondary" href={project.demoUrl}>Demo</a>
+          <nav class="hb-row" aria-label={`${project.name} ${projects.linksLabel}`}>
+            <a class="hb-button hb-button--secondary" href={project.repositoryUrl}>{projects.repository}</a>
+            <a class="hb-button hb-button--secondary" href={project.demoUrl}>{projects.demo}</a>
           </nav>
         </article>
       ))

@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactCta from "../../components/ContactCta.astro";
+import Experience from "../../components/Experience.astro";
+import Hero from "../../components/Hero.astro";
+import LanguageSwitch from "../../components/LanguageSwitch.astro";
+import Projects from "../../components/Projects.astro";
+import Skills from "../../components/Skills.astro";
+import { content } from "../../data";
+
+const page = content.es;
+---
+
+<BaseLayout
+  title={page.seo.title}
+  description={page.seo.description}
+  lang={page.locale}
+  canonical="https://harpeblue.dev/es/"
+>
+  <main class="hb-shell">
+    <div class="hb-page">
+      <LanguageSwitch content={page} />
+      <Hero content={page} />
+      <Experience content={page} />
+      <Projects content={page} />
+      <Skills content={page} />
+      <ContactCta content={page} />
+    </div>
+  </main>
+</BaseLayout>

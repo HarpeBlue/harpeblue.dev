@@ -3,21 +3,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactCta from "../components/ContactCta.astro";
 import Experience from "../components/Experience.astro";
 import Hero from "../components/Hero.astro";
+import LanguageSwitch from "../components/LanguageSwitch.astro";
 import Projects from "../components/Projects.astro";
 import Skills from "../components/Skills.astro";
-import { profile } from "../data";
+import { content } from "../data";
 
-const title = `${profile.name} - ${profile.role}`;
+const page = content.en;
 ---
 
-<BaseLayout title={title} description={profile.summary}>
+<BaseLayout title={page.seo.title} description={page.seo.description} lang={page.locale}>
   <main class="hb-shell">
     <div class="hb-page">
-      <Hero />
-      <Experience />
-      <Projects />
-      <Skills />
-      <ContactCta />
+      <LanguageSwitch content={page} />
+      <Hero content={page} />
+      <Experience content={page} />
+      <Projects content={page} />
+      <Skills content={page} />
+      <ContactCta content={page} />
     </div>
   </main>
 </BaseLayout>

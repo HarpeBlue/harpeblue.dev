@@ -1,21 +1,25 @@
 ---
-import { profile } from "../data";
+import type { PageContent } from "../data/content";
+
+type Props = {
+  content: PageContent;
+};
+
+const { content } = Astro.props;
+const { profile } = content;
 ---
 
 <section class="hb-theme hb-theme--rave-mode contact-cta" aria-labelledby="contact-title">
   <div class="hb-hero contact-cta__content">
     <div class="hb-stack">
-      <p class="hb-eyebrow">Contact</p>
-      <h2 id="contact-title" class="hb-title">Let's build something fast and memorable.</h2>
-      <p class="hb-copy">
-        Open to remote Frontend Software Engineer roles focused on React, product UI,
-        design systems, testing, and AI-assisted engineering workflows.
-      </p>
+      <p class="hb-eyebrow">{content.contact.eyebrow}</p>
+      <h2 id="contact-title" class="hb-title">{content.contact.title}</h2>
+      <p class="hb-copy">{content.contact.description}</p>
     </div>
 
-    <nav class="hb-row" aria-label="Contact links">
-      <a class="hb-button hb-button--secondary" href={profile.links.resume}>Resume</a>
-      <a class="hb-button hb-button--secondary" href={profile.links.email}>Email</a>
+    <nav class="hb-row" aria-label={content.contact.linksLabel}>
+      <a class="hb-button hb-button--secondary" href={profile.links.resume}>{content.contact.resume}</a>
+      <a class="hb-button hb-button--secondary" href={profile.links.email}>{content.contact.email}</a>
       <a class="hb-button hb-button--secondary" href={profile.links.linkedin}>LinkedIn</a>
       <a class="hb-button hb-button--secondary" href={profile.links.github}>GitHub</a>
     </nav>

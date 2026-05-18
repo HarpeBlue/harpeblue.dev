@@ -1,5 +1,12 @@
 ---
-import { profile } from "../data";
+import type { PageContent } from "../data/content";
+
+type Props = {
+  content: PageContent;
+};
+
+const { content } = Astro.props;
+const { profile } = content;
 ---
 
 <section class="hb-theme hb-theme--liquid-signal hb-hero" aria-labelledby="hero-title">
@@ -12,11 +19,11 @@ import { profile } from "../data";
       <p class="hb-copy">{profile.summary}</p>
     </div>
 
-    <nav class="hb-row hero-links" aria-label="Primary links">
-      <a class="hb-button hb-button--secondary" href={profile.links.resume}>Resume</a>
+    <nav class="hb-row hero-links" aria-label={content.hero.linksLabel}>
+      <a class="hb-button hb-button--secondary" href={profile.links.resume}>{content.hero.resume}</a>
       <a class="hb-button hb-button--secondary" href={profile.links.linkedin}>LinkedIn</a>
       <a class="hb-button hb-button--secondary" href={profile.links.github}>GitHub</a>
-      <a class="hb-button hb-button--secondary" href={profile.links.email}>Contact</a>
+      <a class="hb-button hb-button--secondary" href={profile.links.email}>{content.hero.contact}</a>
     </nav>
   </div>
 </section>

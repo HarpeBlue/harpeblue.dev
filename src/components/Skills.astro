@@ -1,20 +1,24 @@
 ---
-import { skills } from "../data";
+import type { PageContent } from "../data/content";
+
+type Props = {
+  content: PageContent;
+};
+
+const { content } = Astro.props;
+const skills = content.skills;
 ---
 
 <section class="hb-theme hb-theme--fresh-utility skills" aria-labelledby="skills-title">
   <div class="hb-hero">
-    <p class="hb-eyebrow">Skills</p>
-    <h2 id="skills-title" class="hb-title">Frontend capabilities</h2>
-    <p class="hb-copy">
-      Technologies and practices grouped by how they show up in real frontend work:
-      product UI, data flows, testing, tooling, and systems.
-    </p>
+    <p class="hb-eyebrow">{skills.eyebrow}</p>
+    <h2 id="skills-title" class="hb-title">{skills.title}</h2>
+    <p class="hb-copy">{skills.description}</p>
   </div>
 
   <div class="hb-grid">
     {
-      skills.map((group) => (
+      skills.groups.map((group) => (
         <article class="hb-card hb-stack">
           <h3>{group.category}</h3>
           <div class="hb-row" aria-label={`${group.category} skills`}>

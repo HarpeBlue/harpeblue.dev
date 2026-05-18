@@ -1,20 +1,24 @@
 ---
-import { experience } from "../data";
+import type { PageContent } from "../data/content";
+
+type Props = {
+  content: PageContent;
+};
+
+const { content } = Astro.props;
+const experience = content.experience;
 ---
 
 <section class="hb-theme hb-theme--fresh-utility experience" aria-labelledby="experience-title">
   <div class="hb-hero">
-    <p class="hb-eyebrow">Experience</p>
-    <h2 id="experience-title" class="hb-title">Production frontend work</h2>
-    <p class="hb-copy">
-      Real product work across React interfaces, dashboards, design-system migrations,
-      testing infrastructure, and code review.
-    </p>
+    <p class="hb-eyebrow">{experience.eyebrow}</p>
+    <h2 id="experience-title" class="hb-title">{experience.title}</h2>
+    <p class="hb-copy">{experience.description}</p>
   </div>
 
   <div class="hb-grid">
     {
-      experience.map((job) => (
+      experience.items.map((job) => (
         <article class="hb-card hb-card--accent hb-stack">
           <header class="experience-card__header">
             <div>
@@ -36,7 +40,7 @@ import { experience } from "../data";
             ))}
           </ul>
 
-          <div class="hb-row" aria-label={`${job.company} technologies`}>
+          <div class="hb-row" aria-label={`${job.company} ${experience.technologiesLabel}`}>
             {job.technologies.map((technology) => (
               <span class="hb-badge">{technology}</span>
             ))}

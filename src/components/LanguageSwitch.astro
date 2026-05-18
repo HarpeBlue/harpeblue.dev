@@ -1,0 +1,21 @@
+---
+import type { PageContent } from "../data/content";
+
+type Props = {
+  content: PageContent;
+};
+
+const { content } = Astro.props;
+---
+
+<nav class="language-switch" aria-label="Language switch">
+  <a class="hb-button hb-button--secondary" href={content.alternatePath}>{content.alternateLabel}</a>
+</nav>
+
+<style>
+  .language-switch {
+    display: flex;
+    justify-content: flex-end;
+    padding-block: var(--hb-space-4);
+  }
+</style>
