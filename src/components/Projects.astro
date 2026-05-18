@@ -1,0 +1,78 @@
+---
+import { projects } from "../data";
+---
+
+<section class="hb-theme hb-theme--terminal-lab projects" aria-labelledby="projects-title">
+  <div class="hb-hero">
+    <p class="hb-eyebrow">Selected work</p>
+    <h2 id="projects-title" class="hb-title">Projects with proof</h2>
+    <p class="hb-copy">
+      A small set of projects that show frontend execution, visual systems,
+      documentation, and practical developer workflows.
+    </p>
+  </div>
+
+  <div class="hb-grid">
+    {
+      projects.map((project) => (
+        <article class="hb-card hb-card--accent hb-stack project-card">
+          <header class="project-card__header">
+            <div>
+              <p class="hb-badge">{project.status}</p>
+              <h3>{project.name}</h3>
+            </div>
+          </header>
+
+          <p>{project.description}</p>
+
+          <ul class="project-card__highlights">
+            {project.highlights.map((highlight) => (
+              <li>{highlight}</li>
+            ))}
+          </ul>
+
+          <div class="hb-row" aria-label={`${project.name} technologies`}>
+            {project.technologies.map((technology) => (
+              <span class="hb-badge">{technology}</span>
+            ))}
+          </div>
+
+          <nav class="hb-row" aria-label={`${project.name} links`}>
+            <a class="hb-button hb-button--secondary" href={project.repositoryUrl}>Repository</a>
+            <a class="hb-button hb-button--secondary" href={project.demoUrl}>Demo</a>
+          </nav>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .projects {
+    display: grid;
+    gap: var(--hb-space-8);
+    margin-block: var(--hb-space-12);
+  }
+
+  .project-card {
+    align-content: start;
+  }
+
+  .project-card__header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--hb-space-4);
+  }
+
+  .project-card__highlights {
+    display: grid;
+    gap: var(--hb-space-3);
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--hb-muted);
+  }
+
+  .project-card__highlights li::marker {
+    color: var(--hb-secondary);
+  }
+</style>

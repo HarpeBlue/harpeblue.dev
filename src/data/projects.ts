@@ -1,5 +1,18 @@
 export const projects = [
   {
+    name: "harpeblue.dev",
+    description:
+      "Professional portfolio built as a fast, static-first site to present frontend experience, projects, and HarpeBlue's visual identity.",
+    repositoryUrl: "https://github.com/HarpeBlue/harpeblue.dev",
+    demoUrl: "https://harpeblue.dev",
+    status: "Active",
+    highlights: [
+      "Built with Astro to prioritize performance, SEO, maintainability, and static deployment.",
+      "Uses HarpeBlue Signal as a real design-system dependency instead of recreating visual patterns locally.",
+    ],
+    technologies: ["Astro", "TypeScript", "CSS", "HarpeBlue Signal"],
+  },
+  {
     name: "HarpeBlue Signal",
     description:
       "Framework-agnostic visual identity system built with CSS tokens, themes, utilities, and examples.",
