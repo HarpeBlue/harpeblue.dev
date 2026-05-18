@@ -11,6 +11,7 @@ export const profile = {
     email: "mailto:hello@harpeblue.dev",
     github: "https://github.com/HarpeBlue",
     linkedin: "https://www.linkedin.com/in/harpeblue/",
+    resume: "/resume/harold-penaloza-resume-en.pdf",
     x: "https://x.com/HarpeBlue",
   },
 } as const;

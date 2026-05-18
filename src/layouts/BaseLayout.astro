@@ -3,11 +3,12 @@ type Props = {
   title: string;
   description: string;
   lang?: string;
+  canonical?: string;
 };
 
 import "../styles/global.css";
 
-const { title, description, lang = "en" } = Astro.props;
+const { title, description, lang = "en", canonical = "https://harpeblue.dev/" } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,6 +20,14 @@ const { title, description, lang = "en" } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <title>{title}</title>
   </head>
   <body>
