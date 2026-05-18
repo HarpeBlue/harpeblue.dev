@@ -1,0 +1,112 @@
+---
+import type { PageContent } from "../data/content/index";
+
+type Props = {
+  content: PageContent;
+};
+
+const { content } = Astro.props;
+---
+
+<header class="site-nav hb-theme hb-theme--liquid-signal">
+  <nav class="site-nav__inner" aria-label={content.navigation.label}>
+    <a class="site-nav__brand" href="#hero">{content.profile.alias}</a>
+    <div class="site-nav__links">
+      {
+        content.navigation.items.map((item) => (
+          <a class="site-nav__link" href={item.href}>{item.label}</a>
+        ))
+      }
+      <a class="site-nav__link site-nav__link--language" href={content.alternatePath}>{content.alternateLabel}</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-nav {
+    position: sticky;
+    top: var(--hb-space-3);
+    z-index: 10;
+    width: min(100% - 2rem, 74rem);
+    margin: var(--hb-space-3) auto 0;
+    background: color-mix(in srgb, var(--hb-surface) 78%, transparent);
+    border: 1px solid color-mix(in srgb, var(--hb-border) 80%, transparent);
+    border-radius: var(--hb-radius-pill);
+    box-shadow: var(--hb-shadow-soft);
+    backdrop-filter: blur(18px);
+  }
+
+  .site-nav__inner {
+    display: flex;
+    gap: var(--hb-space-4);
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3rem;
+    padding: 0.35rem 0.45rem 0.35rem 1rem;
+  }
+
+  .site-nav__brand,
+  .site-nav__link {
+    color: var(--hb-text);
+    font: 800 0.75rem/1 var(--hb-font-ui);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .site-nav__brand {
+    color: var(--hb-secondary);
+  }
+
+  .site-nav__links {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .site-nav__links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-nav__link {
+    padding: 0.7rem 0.8rem;
+    color: var(--hb-muted);
+    border-radius: var(--hb-radius-pill);
+    white-space: nowrap;
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link:focus-visible {
+    color: var(--hb-text);
+    background: color-mix(in srgb, var(--hb-primary) 16%, transparent);
+    outline: none;
+  }
+
+  .site-nav__link--language {
+    color: var(--hb-secondary);
+    background: color-mix(in srgb, var(--hb-secondary) 10%, transparent);
+  }
+
+  @media (max-width: 48rem) {
+    .site-nav {
+      width: min(100% - 1rem, 42rem);
+      border-radius: var(--hb-radius-lg);
+    }
+
+    .site-nav__inner {
+      display: grid;
+      gap: var(--hb-space-2);
+      padding: 0.75rem;
+    }
+
+    .site-nav__links {
+      width: 100%;
+    }
+
+    .site-nav__link {
+      padding-inline: 0.75rem;
+    }
+  }
+</style>

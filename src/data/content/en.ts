@@ -20,6 +20,16 @@ export const enContent = {
     resume: "Resume",
     contact: "Contact",
   },
+  navigation: {
+    label: "Primary navigation",
+    items: [
+      { label: "Home", href: "#hero" },
+      { label: "Experience", href: "#experience" },
+      { label: "Projects", href: "#projects" },
+      { label: "Skills", href: "#skills" },
+      { label: "Contact", href: "#contact" },
+    ],
+  },
   experience: {
     eyebrow: "Experience",
     title: "Production frontend work",

@@ -3,8 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ContactCta from "../../components/ContactCta.astro";
 import Experience from "../../components/Experience.astro";
 import Hero from "../../components/Hero.astro";
-import LanguageSwitch from "../../components/LanguageSwitch.astro";
 import Projects from "../../components/Projects.astro";
+import SiteNav from "../../components/SiteNav.astro";
 import Skills from "../../components/Skills.astro";
 import { content } from "../../data";
 
@@ -22,9 +22,9 @@ const page = content.es;
     { hrefLang: "x-default", href: "https://harpeblue.dev/" },
   ]}
 >
+  <SiteNav content={page} />
   <main class="hb-shell">
     <div class="hb-page">
-      <LanguageSwitch content={page} />
       <Hero content={page} />
       <Experience content={page} />
       <Projects content={page} />

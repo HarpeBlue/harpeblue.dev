@@ -21,6 +21,16 @@ export const esContent = {
     resume: "CV",
     contact: "Contacto",
   },
+  navigation: {
+    label: "Navegación principal",
+    items: [
+      { label: "Inicio", href: "#hero" },
+      { label: "Experiencia", href: "#experience" },
+      { label: "Proyectos", href: "#projects" },
+      { label: "Skills", href: "#skills" },
+      { label: "Contacto", href: "#contact" },
+    ],
+  },
   experience: {
     eyebrow: "Experiencia",
     title: "Frontend real en producción",
