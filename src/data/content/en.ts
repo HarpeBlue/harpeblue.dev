@@ -17,7 +17,7 @@ export const enContent = {
   },
   hero: {
     linksLabel: "Primary links",
-    resume: "Resume",
+    resume: "CV",
     contact: "Contact",
   },
   navigation: {
@@ -147,7 +147,7 @@ export const enContent = {
     description:
       "Open to remote Frontend Software Engineer roles focused on React, product UI, design systems, testing, and AI-assisted engineering workflows.",
     linksLabel: "Contact links",
-    resume: "Resume",
+    resume: "CV",
     email: "Email",
   },
 } as const;

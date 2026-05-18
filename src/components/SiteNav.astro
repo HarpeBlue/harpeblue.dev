@@ -10,7 +10,7 @@ const { content } = Astro.props;
 
 <header class="site-nav hb-theme hb-theme--liquid-signal">
   <nav class="site-nav__inner" aria-label={content.navigation.label}>
-    <a class="site-nav__brand" href="#hero">{content.profile.alias}</a>
+    <a class="site-nav__brand" href="#hero" translate="no">{content.profile.alias}</a>
     <div class="site-nav__links">
       {
         content.navigation.items.map((item) => (
