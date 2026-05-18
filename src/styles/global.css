@@ -31,8 +31,3 @@ body {
 a {
   color: inherit;
 }
-
-main {
-  width: min(100% - 2rem, 72rem);
-  margin-inline: auto;
-}

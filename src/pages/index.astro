@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Experience from "../components/Experience.astro";
 import Hero from "../components/Hero.astro";
 import { profile } from "../data";
 
@@ -7,7 +8,10 @@ const title = `${profile.name} - ${profile.role}`;
 ---
 
 <BaseLayout title={title} description={profile.summary}>
-  <main>
-    <Hero />
+  <main class="hb-shell">
+    <div class="hb-page">
+      <Hero />
+      <Experience />
+    </div>
   </main>
 </BaseLayout>

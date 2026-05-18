@@ -1,0 +1,92 @@
+---
+import { experience } from "../data";
+---
+
+<section class="hb-theme hb-theme--fresh-utility experience" aria-labelledby="experience-title">
+  <div class="hb-hero">
+    <p class="hb-eyebrow">Experience</p>
+    <h2 id="experience-title" class="hb-title">Production frontend work</h2>
+    <p class="hb-copy">
+      Real product work across React interfaces, dashboards, design-system migrations,
+      testing infrastructure, and code review.
+    </p>
+  </div>
+
+  <div class="hb-grid">
+    {
+      experience.map((job) => (
+        <article class="hb-card hb-card--accent hb-stack">
+          <header class="experience-card__header">
+            <div>
+              <h3>{job.company}</h3>
+              <p class="experience-card__role">{job.role}</p>
+            </div>
+            <p class="experience-card__meta">
+              {job.startDate} - {job.endDate}
+              <br />
+              {job.location}
+            </p>
+          </header>
+
+          <p>{job.summary}</p>
+
+          <ul class="experience-card__highlights">
+            {job.highlights.map((highlight) => (
+              <li>{highlight}</li>
+            ))}
+          </ul>
+
+          <div class="hb-row" aria-label={`${job.company} technologies`}>
+            {job.technologies.map((technology) => (
+              <span class="hb-badge">{technology}</span>
+            ))}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .experience {
+    display: grid;
+    gap: var(--hb-space-8);
+    margin-block: var(--hb-space-12);
+  }
+
+  .experience-card__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--hb-space-4);
+    justify-content: space-between;
+  }
+
+  .experience-card__role,
+  .experience-card__meta {
+    margin: 0;
+    color: var(--hb-muted);
+  }
+
+  .experience-card__meta {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .experience-card__highlights {
+    display: grid;
+    gap: var(--hb-space-3);
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--hb-muted);
+  }
+
+  .experience-card__highlights li::marker {
+    color: var(--hb-secondary);
+  }
+
+  @media (min-width: 42rem) {
+    .experience-card__meta {
+      text-align: right;
+    }
+  }
+</style>
