@@ -16,6 +16,8 @@
 html {
   min-width: 320px;
   overflow-x: clip;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   background: #07111f;
 }
 
