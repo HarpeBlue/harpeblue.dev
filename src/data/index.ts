@@ -1,4 +1,4 @@
-export { content } from "./content";
+export { content } from "./content/index";
 export { profile } from "./profile";
 export { experience } from "./experience";
 export { projects } from "./projects";
