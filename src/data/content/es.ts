@@ -15,6 +15,10 @@ export const esContent = {
   },
   profile: {
     ...profile,
+    links: {
+      ...profile.links,
+      resume: "/resume/harold-penaloza-resume-es.pdf",
+    },
     headline: "Construyo interfaces rápidas y expresivas para productos complejos.",
     summary:
       "Frontend Software Engineer con 5 años de experiencia construyendo interfaces B2B SaaS con React, dashboards complejos, componentes de design system e infraestructura de pruebas frontend.",
@@ -92,12 +96,27 @@ export const esContent = {
     eyebrow: "Sistemas seleccionados",
     title: "Proyectos con una razón para existir.",
     description:
-      "Una selección compacta de proyectos que muestran criterio visual, documentación, entrega estática y flujos prácticos para desarrollo.",
+      "Una selección compacta de proyectos que muestran ingeniería de producto local-first, criterio visual, documentación y flujos prácticos para desarrollo.",
     technologiesLabel: "tecnologías",
     linksLabel: "enlaces del proyecto",
     repository: "Código",
     demo: "Proyecto en vivo",
+    website: "Sitio del producto",
+    app: "Abrir PWA",
     items: [
+      {
+        name: "Synapse Loom",
+        description:
+          "Espacio local-first para notas y aprendizaje que convierte Markdown en conocimiento conectado y repasos con repetición espaciada.",
+        demoUrl: "https://synapseloom.app",
+        appUrl: "https://app.synapseloom.app",
+        status: "Activo",
+        highlights: [
+          "Comparte una superficie de producto en React 19 y TypeScript entre una PWA instalable y el cliente de escritorio con Tauri, respaldada por lógica de dominio reutilizable en Rust.",
+          "Ejecuta SQLite en WebAssembly sobre OPFS para conservar datos locales y funcionar offline, con sincronización y Spaces compartidos opcionales en lugar de un muro de registro.",
+        ],
+        technologies: ["React 19", "TypeScript", "Rust", "WebAssembly", "SQLite", "PWA"],
+      },
       {
         name: "harpeblue.com",
         description:
@@ -123,19 +142,6 @@ export const esContent = {
           "Incluye playground público y ejemplos de documentación usando CSS puro y tooling ligero con JavaScript.",
         ],
         technologies: ["CSS", "Design Tokens", "JavaScript", "GitHub Pages"],
-      },
-      {
-        name: "Omarchy / Terminal Lab Cheatsheets",
-        description: "Concepto de cheatsheets técnicas usando el estilo visual Terminal Lab de HarpeBlue Signal.",
-        repositoryUrl:
-          "https://github.com/HarpeBlue/harpeblue-signal/blob/main/docs/examples/terminal-lab-omarchy.html",
-        demoUrl: "https://harpeblue.github.io/harpeblue-signal/examples/terminal-lab-omarchy.html",
-        status: "Prototipo",
-        highlights: [
-          "Explora consulta rápida y documentación legible de comandos para flujos Linux y desarrollo.",
-          "Funciona como semilla para una futura plataforma pública de cheatsheets.",
-        ],
-        technologies: ["HTML", "CSS", "HarpeBlue Signal", "Linux"],
       },
     ],
   },

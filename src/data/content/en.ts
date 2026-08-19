@@ -91,12 +91,27 @@ export const enContent = {
     eyebrow: "Selected systems",
     title: "Projects with a reason to exist.",
     description:
-      "A compact set of projects showing visual judgment, documentation, static delivery, and practical developer workflows.",
+      "A compact set of projects showing local-first product engineering, visual judgment, documentation, and practical developer workflows.",
     technologiesLabel: "technologies",
     linksLabel: "project links",
     repository: "Source",
     demo: "Live project",
+    website: "Product site",
+    app: "Open PWA",
     items: [
+      {
+        name: "Synapse Loom",
+        description:
+          "Local-first notes and learning workspace that turns Markdown notes into connected knowledge and spaced-repetition review.",
+        demoUrl: "https://synapseloom.app",
+        appUrl: "https://app.synapseloom.app",
+        status: "Active",
+        highlights: [
+          "Shares a React 19 and TypeScript product surface across an installable PWA and Tauri desktop client, backed by reusable Rust domain logic.",
+          "Runs SQLite in WebAssembly over OPFS for durable local data and offline access, with optional sync and shared Spaces instead of a registration wall.",
+        ],
+        technologies: ["React 19", "TypeScript", "Rust", "WebAssembly", "SQLite", "PWA"],
+      },
       {
         name: "harpeblue.com",
         description:
@@ -122,19 +137,6 @@ export const enContent = {
           "Includes a public playground and documentation examples using pure CSS and lightweight JavaScript tooling.",
         ],
         technologies: ["CSS", "Design Tokens", "JavaScript", "GitHub Pages"],
-      },
-      {
-        name: "Omarchy / Terminal Lab Cheatsheets",
-        description: "Technical cheatsheet concept using HarpeBlue Signal's Terminal Lab visual style.",
-        repositoryUrl:
-          "https://github.com/HarpeBlue/harpeblue-signal/blob/main/docs/examples/terminal-lab-omarchy.html",
-        demoUrl: "https://harpeblue.github.io/harpeblue-signal/examples/terminal-lab-omarchy.html",
-        status: "Prototype",
-        highlights: [
-          "Explores fast lookup and readable command documentation for Linux and developer workflows.",
-          "Works as the seed for a future public cheatsheets platform.",
-        ],
-        technologies: ["HTML", "CSS", "HarpeBlue Signal", "Linux"],
       },
     ],
   },

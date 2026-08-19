@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "resume:build": "node docs/resume/render-resume.mjs",
     "astro": "astro"
   },
   "dependencies": {

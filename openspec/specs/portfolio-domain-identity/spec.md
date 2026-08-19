@@ -40,11 +40,11 @@ Visible email actions and the public CV SHALL use `hello@harpeblue.com`. The mai
 - **THEN** production cutover is treated as incomplete rather than publishing a broken primary contact path
 
 ### Requirement: Public CV remains safe and current
-The public English CV SHALL show the new domain and email address, preserve the supported professional facts already present in the portfolio, and SHALL NOT expose a private phone number or local source-file path.
+The public English and Spanish CVs SHALL match the visitor's selected locale, show the current domain and email address, preserve supported professional facts, and SHALL NOT expose a private phone number or local source-file path.
 
-#### Scenario: Recruiter downloads the CV
-- **WHEN** a visitor downloads the public CV
-- **THEN** its visible and extractable text uses `harpeblue.com` and `hello@harpeblue.com` without a phone number or local filesystem URL
+#### Scenario: Recruiter downloads a localized CV
+- **WHEN** a visitor downloads the public CV from either localized portfolio route
+- **THEN** the downloaded document matches that route's language and its visible and extractable text uses `harpeblue.com` and `hello@harpeblue.com` without a phone number or local filesystem URL
 
 ### Requirement: The www alias preserves navigation
 The production deployment SHALL permanently redirect `www.harpeblue.com` requests to the HTTPS apex `harpeblue.com` host while preserving the requested path and query string. The retired `harpeblue.dev` domain is outside the production migration contract and is not required to resolve or redirect after its registration expires.

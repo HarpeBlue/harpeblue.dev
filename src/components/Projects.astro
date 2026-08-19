@@ -42,8 +42,15 @@ const projects = content.projects;
             </ul>
 
             <nav class="actions project__actions" aria-label={`${project.name} ${projects.linksLabel}`}>
-              <a class="action" href={project.repositoryUrl}>{projects.repository}</a>
-              <a class="action action--primary" href={project.demoUrl}>{projects.demo}</a>
+              {"repositoryUrl" in project && (
+                <a class="action" href={project.repositoryUrl}>{projects.repository}</a>
+              )}
+              <a class:list={["action", { "action--primary": !("appUrl" in project) }]} href={project.demoUrl}>
+                {"appUrl" in project ? projects.website : projects.demo}
+              </a>
+              {"appUrl" in project && (
+                <a class="action action--primary" href={project.appUrl}>{projects.app}</a>
+              )}
             </nav>
           </div>
         </article>

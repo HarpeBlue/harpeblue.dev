@@ -20,6 +20,10 @@ The page SHALL present production experience before supporting projects and skil
 - **WHEN** a visitor scrolls from the hero through contact
 - **THEN** the visual rhythm differentiates each section while preserving a clear narrative from identity to proof to capabilities to contact
 
+#### Scenario: A showcased project has private source code
+- **WHEN** a selected project cannot expose its repository publicly
+- **THEN** its portfolio card links only to useful public product surfaces and does not render a missing, misleading, or private source-code action
+
 ### Requirement: Local visual identity is portfolio-owned
 The rendered site SHALL use a small local set of visual tokens and portfolio-specific components without loading or depending on `@harpeblue/signal`. The visual direction SHALL remain dark, technical, and recognizably HarpeBlue through deep navy surfaces, electric blue and cyan accents, strong editorial typography, precise borders, and restrained atmospheric effects.
 
