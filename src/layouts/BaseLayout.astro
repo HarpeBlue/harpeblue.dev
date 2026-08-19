@@ -1,47 +1,100 @@
 ---
+import "../styles/global.css";
+import { profile } from "../data/profile";
+import { absoluteUrl, languageAlternates, site, type SiteLocale } from "../data/site";
+
 type Props = {
   title: string;
   description: string;
-  lang?: string;
-  canonical?: string;
-  alternates?: Array<{
-    hrefLang: string;
-    href: string;
-  }>;
+  lang: SiteLocale;
+  path: string;
+  ogLocale: string;
+  socialImageAlt: string;
+  skipLink: string;
 };
 
-import "../styles/global.css";
+const { title, description, lang, path, ogLocale, socialImageAlt, skipLink } = Astro.props;
+const canonical = absoluteUrl(path);
+const socialImage = absoluteUrl(site.socialImagePath);
+const alternateOgLocale = lang === "en" ? "es_CO" : "en_US";
 
-const {
-  title,
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${canonical}#profile-page`,
+  url: canonical,
+  name: title,
   description,
-  lang = "en",
-  canonical = "https://harpeblue.dev/",
-  alternates = [],
-} = Astro.props;
+  inLanguage: lang,
+  isPartOf: {
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: site.url,
+    name: site.name,
+    inLanguage: ["en", "es"],
+  },
+  mainEntity: {
+    "@type": "Person",
+    "@id": `${site.url}/#person`,
+    name: profile.name,
+    alternateName: profile.alias,
+    url: site.url,
+    email: site.email,
+    jobTitle: profile.role,
+    homeLocation: {
+      "@type": "Place",
+      name: profile.location,
+    },
+    sameAs: [site.profiles.linkedin, site.profiles.github, site.profiles.x],
+  },
+};
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content={site.themeColor} />
     <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+    <meta name="robots" content="index, follow" />
     <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" sizes="any" href="/favicon.ico" />
     <link rel="canonical" href={canonical} />
-    {alternates.map((alternate) => <link rel="alternate" hreflang={alternate.hrefLang} href={alternate.href} />)}
+    {
+      languageAlternates.map((alternate) => (
+        <link rel="alternate" hreflang={alternate.hrefLang} href={alternate.href} />
+      ))
+    }
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="profile" />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={alternateOgLocale} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={socialImageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <title>{title}</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">{skipLink}</a>
     <slot />
   </body>
 </html>

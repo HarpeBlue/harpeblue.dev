@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Harold Peñaloza — Frontend Software Engineer</title>
+  <desc id="description">HarpeBlue portfolio social card in deep navy, electric blue, and cyan.</desc>
+  <defs>
+    <linearGradient id="background" x1="85" y1="40" x2="1110" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0e1b3d" />
+      <stop offset="0.48" stop-color="#050816" />
+      <stop offset="1" stop-color="#071020" />
+    </linearGradient>
+    <linearGradient id="name" x1="88" y1="190" x2="870" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4f7ff" />
+      <stop offset="0.56" stop-color="#83a7ff" />
+      <stop offset="1" stop-color="#3778ff" />
+    </linearGradient>
+    <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M72 0H0V72" fill="none" stroke="#6d98ff" stroke-opacity=".08" />
+    </pattern>
+    <radialGradient id="glow">
+      <stop stop-color="#48ead5" stop-opacity=".2" />
+      <stop offset="1" stop-color="#48ead5" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" rx="0" fill="url(#background)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <circle cx="1080" cy="110" r="300" fill="url(#glow)" />
+  <path d="M86 82H1114" stroke="#6d98ff" stroke-opacity=".38" />
+  <path d="M86 548H1114" stroke="#6d98ff" stroke-opacity=".24" />
+  <circle cx="86" cy="82" r="6" fill="#48ead5" />
+  <circle cx="1114" cy="548" r="6" fill="#3778ff" />
+
+  <g transform="translate(86 108)">
+    <rect width="52" height="52" rx="12" fill="#48ead5" />
+    <text x="26" y="33" fill="#050816" font-family="ui-monospace, monospace" font-size="15" font-weight="800" text-anchor="middle">HB</text>
+    <text x="70" y="32" fill="#48ead5" font-family="ui-monospace, monospace" font-size="18" font-weight="800" letter-spacing="3">HARPEBLUE</text>
+  </g>
+
+  <text x="86" y="275" fill="url(#name)" font-family="ui-sans-serif, system-ui, sans-serif" font-size="94" font-weight="900" letter-spacing="-6">Harold Peñaloza</text>
+  <text x="91" y="340" fill="#f4f7ff" font-family="ui-sans-serif, system-ui, sans-serif" font-size="34" font-weight="760" letter-spacing="-1">Frontend Software Engineer</text>
+  <text x="91" y="405" fill="#a6b5d3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24">Interfaces · Design systems · Testing · Product engineering</text>
+
+  <g transform="translate(88 494)">
+    <text fill="#48ead5" font-family="ui-monospace, monospace" font-size="17" font-weight="700" letter-spacing="2">HARPEBLUE.COM</text>
+    <text x="827" fill="#a6b5d3" font-family="ui-monospace, monospace" font-size="16" letter-spacing="1">COLOMBIA / REMOTE</text>
+  </g>
+</svg>

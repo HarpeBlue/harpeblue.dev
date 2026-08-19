@@ -15,20 +15,17 @@ const page = content.en;
   title={page.seo.title}
   description={page.seo.description}
   lang={page.locale}
-  alternates={[
-    { hrefLang: "en", href: "https://harpeblue.dev/" },
-    { hrefLang: "es", href: "https://harpeblue.dev/es/" },
-    { hrefLang: "x-default", href: "https://harpeblue.dev/" },
-  ]}
+  path={page.path}
+  ogLocale={page.seo.ogLocale}
+  socialImageAlt={page.seo.socialImageAlt}
+  skipLink={page.skipLink}
 >
   <SiteNav content={page} />
-  <main class="hb-shell">
-    <div class="hb-page">
-      <Hero content={page} />
-      <Experience content={page} />
-      <Projects content={page} />
-      <Skills content={page} />
-      <ContactCta content={page} />
-    </div>
+  <main id="main-content" class="page-shell page-flow" tabindex="-1">
+    <Hero content={page} />
+    <Experience content={page} />
+    <Projects content={page} />
+    <Skills content={page} />
+    <ContactCta content={page} />
   </main>
 </BaseLayout>

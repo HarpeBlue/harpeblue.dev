@@ -1,4 +1,4 @@
-# harpeblue.dev
+# harpeblue.com
 
 Professional portfolio for Harold Peñaloza / HarpeBlue.
 
@@ -17,7 +17,8 @@ Frontend Software Engineer
 - Astro
 - TypeScript
 - CSS
-- HarpeBlue Signal
+
+The portfolio owns its visual system locally. HarpeBlue Signal remains a separate showcased project, not a runtime dependency of this site.
 
 ## Commands
 

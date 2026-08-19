@@ -9,25 +9,107 @@ const { content } = Astro.props;
 const skills = content.skills;
 ---
 
-<section id="skills" class="hb-theme hb-theme--liquid-signal portfolio-section skills" aria-labelledby="skills-title">
-  <div class="hb-hero">
-    <p class="hb-eyebrow">{skills.eyebrow}</p>
-    <h2 id="skills-title" class="portfolio-section-title">{skills.title}</h2>
-    <p class="hb-copy">{skills.description}</p>
-  </div>
+<section id="skills" class="section skills" aria-labelledby="skills-title">
+  <header class="section-heading">
+    <p class="eyebrow">04 / {skills.eyebrow}</p>
+    <h2 id="skills-title" class="section-title">{skills.title}</h2>
+    <p class="section-copy">{skills.description}</p>
+  </header>
 
-  <div class="hb-grid">
+  <ol class="skills__matrix">
     {
-      skills.groups.map((group) => (
-        <article class="hb-card hb-stack">
-          <h3>{group.category}</h3>
-          <div class="hb-row" aria-label={`${group.category} skills`}>
-            {group.items.map((skill) => (
-              <span class="hb-badge">{skill}</span>
-            ))}
+      skills.groups.map((group, index) => (
+        <li class="skills__row">
+          <span class="skills__index" aria-hidden="true">0{index + 1}</span>
+          <div class="skills__description">
+            <h3>{group.category}</h3>
+            <p>{group.description}</p>
           </div>
-        </article>
+          <ul class="skills__items" aria-label={`${group.category} skills`}>
+            {group.items.map((skill) => <li translate="no">{skill}</li>)}
+          </ul>
+        </li>
       ))
     }
-  </div>
+  </ol>
 </section>
+
+<style>
+  .skills__matrix {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--line-strong);
+    list-style: none;
+  }
+
+  .skills__row {
+    display: grid;
+    grid-template-columns: 3rem minmax(12rem, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(1rem, 4vw, 3rem);
+    align-items: start;
+    padding-block: clamp(1.35rem, 3vw, 2rem);
+    border-top: 1px solid var(--line);
+    transition: background-color 160ms ease;
+  }
+
+  .skills__row:hover {
+    background: linear-gradient(90deg, rgb(55 120 255 / 8%), transparent 70%);
+  }
+
+  .skills__index {
+    padding-top: 0.3rem;
+    color: var(--blue);
+    font: 750 0.7rem/1 var(--font-mono);
+  }
+
+  .skills__description h3 {
+    margin: 0 0 0.45rem;
+    color: var(--text);
+    font-size: clamp(1.15rem, 2.3vw, 1.55rem);
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  .skills__description p {
+    max-width: 35ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .skills__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .skills__items li {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: var(--text-soft);
+    font: 650 0.82rem/1.4 var(--font-mono);
+  }
+
+  .skills__items li::before {
+    width: 0.3rem;
+    height: 0.3rem;
+    flex: 0 0 auto;
+    background: var(--cyan);
+    border-radius: 50%;
+    content: "";
+  }
+
+  @media (max-width: 46rem) {
+    .skills__row {
+      grid-template-columns: 2rem minmax(0, 1fr);
+    }
+
+    .skills__items {
+      grid-column: 2;
+    }
+  }
+</style>

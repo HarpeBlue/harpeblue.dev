@@ -5,25 +5,38 @@ export const enContent = {
   path: "/",
   alternatePath: "/es/",
   alternateLabel: "ES",
+  skipLink: "Skip to main content",
   seo: {
-    title: `${profile.name} - ${profile.role}`,
+    title: `${profile.name} — ${profile.role}`,
     description: profile.summary,
+    ogLocale: "en_US",
+    socialImageAlt: "Harold Peñaloza, Frontend Software Engineer — HarpeBlue portfolio",
   },
   profile: {
     ...profile,
     headline: "I build fast, expressive interfaces for complex products.",
     summary:
       "Frontend Software Engineer with 5 years of React experience building B2B SaaS interfaces, complex dashboards, design-system components, and frontend testing infrastructure.",
+    availability: "Open to remote frontend roles",
   },
   hero: {
-    linksLabel: "Primary links",
+    eyebrow: "Frontend Software Engineer",
+    intro: "Product interfaces, design systems, testing, and the engineering behind them.",
+    linksLabel: "Primary actions",
+    work: "View selected work",
     resume: "CV",
-    contact: "Contact",
+    contact: "Start a conversation",
+    proofLabel: "Selected proof",
+    proofs: [
+      { value: "5 years", label: "React in production" },
+      { value: "2h → 30m", label: "Frontend test pipeline" },
+      { value: "Remote", label: "Colombia-based" },
+    ],
   },
   navigation: {
     label: "Primary navigation",
+    languageLabel: "Switch to Spanish",
     items: [
-      { label: "Home", href: "#hero" },
       { label: "Experience", href: "#experience" },
       { label: "Projects", href: "#projects" },
       { label: "Skills", href: "#skills" },
@@ -31,17 +44,24 @@ export const enContent = {
     ],
   },
   experience: {
-    eyebrow: "Experience",
-    title: "Production frontend work",
+    eyebrow: "Production record",
+    title: "Frontend work that changed the system.",
     description:
-      "Real product work across React interfaces, dashboards, design-system migrations, testing infrastructure, and code review.",
-    technologiesLabel: "technologies",
+      "Five years inside a complex IoT B2B SaaS product—shipping React interfaces, migrating foundations, improving test feedback, and helping teams work with more confidence.",
+    outcome: {
+      value: "2h → 30m",
+      label: "Frontend test pipeline",
+      detail: "Led the migration from Jest to Vitest.",
+    },
+    contributionsLabel: "Selected contributions",
+    technologiesLabel: "Production toolkit",
     items: [
       {
         company: "Ubidots S.A.S.",
         role: "Frontend Developer",
         startDate: "2021-02",
         endDate: "2026-04",
+        period: "February 2021 — April 2026",
         location: "Colombia / Remote",
         summary: "Built and maintained React-based frontend features across an IoT B2B SaaS platform.",
         highlights: [
@@ -68,27 +88,27 @@ export const enContent = {
     ],
   },
   projects: {
-    eyebrow: "Selected work",
-    title: "Projects with proof",
+    eyebrow: "Selected systems",
+    title: "Projects with a reason to exist.",
     description:
-      "A small set of projects that show frontend execution, visual systems, documentation, and practical developer workflows.",
+      "A compact set of projects showing visual judgment, documentation, static delivery, and practical developer workflows.",
     technologiesLabel: "technologies",
-    linksLabel: "links",
-    repository: "Repository",
-    demo: "Demo",
+    linksLabel: "project links",
+    repository: "Source",
+    demo: "Live project",
     items: [
       {
-        name: "harpeblue.dev",
+        name: "harpeblue.com",
         description:
-          "Professional portfolio built as a fast, static-first site to present frontend experience, projects, and HarpeBlue's visual identity.",
-        repositoryUrl: "https://github.com/HarpeBlue/harpeblue.dev",
-        demoUrl: "https://harpeblue.dev",
+          "Professional portfolio built as a fast, bilingual, static-first site for frontend experience, proof, and the evolving HarpeBlue identity.",
+        repositoryUrl: "https://github.com/HarpeBlue/harpeblue.com",
+        demoUrl: "https://harpeblue.com",
         status: "Active",
         highlights: [
           "Built with Astro to prioritize performance, SEO, maintainability, and static deployment.",
-          "Uses HarpeBlue Signal as a real design-system dependency instead of recreating visual patterns locally.",
+          "Owns a compact local visual system and bilingual content architecture without a client-side application runtime.",
         ],
-        technologies: ["Astro", "TypeScript", "CSS", "HarpeBlue Signal"],
+        technologies: ["Astro", "TypeScript", "CSS", "Accessible HTML"],
       },
       {
         name: "HarpeBlue Signal",
@@ -119,35 +139,54 @@ export const enContent = {
     ],
   },
   skills: {
-    eyebrow: "Skills",
-    title: "Frontend capabilities",
+    eyebrow: "Capability matrix",
+    title: "How I approach frontend work.",
     description:
-      "Technologies and practices grouped by how they show up in real frontend work: product UI, data flows, testing, tooling, and systems.",
+      "Tools matter, but the useful signal is where they appear: product UI, data flows, testing, tooling, and reusable systems.",
     groups: [
       {
-        category: "Frontend",
+        category: "Product UI",
+        description: "Responsive interfaces and reusable product patterns.",
         items: ["React", "JavaScript", "TypeScript", "HTML", "CSS", "styled-components"],
       },
-      { category: "State and Data", items: ["Redux", "Context API", "React Query", "Formik"] },
-      { category: "Testing", items: ["Jest", "Vitest", "React Testing Library", "Cypress"] },
-      { category: "Tooling", items: ["Webpack", "Rspack", "Git", "GitHub", "npm"] },
+      {
+        category: "State and Data",
+        description: "Predictable client state and asynchronous product data.",
+        items: ["Redux", "Context API", "React Query", "Formik"],
+      },
+      {
+        category: "Testing",
+        description: "Fast feedback from components to complete browser flows.",
+        items: ["Jest", "Vitest", "React Testing Library", "Cypress"],
+      },
+      {
+        category: "Tooling",
+        description: "Build systems and everyday engineering foundations.",
+        items: ["Webpack", "Rspack", "Git", "GitHub", "npm"],
+      },
       {
         category: "UI Systems",
+        description: "Consistency across complex, evolving interfaces.",
         items: ["Design systems", "Responsive UI", "Dashboards", "Reusable components"],
       },
       {
         category: "Workflow",
+        description: "Making changes understandable, reviewable, and safer.",
         items: ["Code review", "Frontend migrations", "Linux", "AI-assisted development"],
       },
     ],
   },
   contact: {
-    eyebrow: "Contact",
-    title: "Let's build something fast and memorable.",
+    eyebrow: "Open channel",
+    title: "Bring me the interface that needs clarity.",
     description:
-      "Open to remote Frontend Software Engineer roles focused on React, product UI, design systems, testing, and AI-assisted engineering workflows.",
+      "I'm open to remote Frontend Software Engineer roles centered on React, product UI, design systems, testing, and thoughtful AI-assisted workflows.",
     linksLabel: "Contact links",
     resume: "CV",
-    email: "Email",
+    email: "Email me",
+    availabilityLabel: "Availability",
+    locationLabel: "Based in",
+    profilesLabel: "Professional profiles",
+    footerPrefix: "Designed and built by",
   },
 } as const;

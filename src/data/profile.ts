@@ -1,3 +1,5 @@
+import { emailHref, site } from "./site";
+
 export const profile = {
   name: "Harold Peñaloza",
   alias: "HarpeBlue",
@@ -7,11 +9,13 @@ export const profile = {
   headline: "I build fast, expressive interfaces for complex products.",
   summary:
     "Frontend Software Engineer with 5 years of React experience building B2B SaaS interfaces, complex dashboards, design-system components, and frontend testing infrastructure.",
+  email: site.email,
+  website: site.url,
   links: {
-    email: "mailto:hello@harpeblue.dev",
-    github: "https://github.com/HarpeBlue",
-    linkedin: "https://www.linkedin.com/in/harpeblue/",
+    email: emailHref,
+    github: site.profiles.github,
+    linkedin: site.profiles.linkedin,
     resume: "/resume/harold-penaloza-resume-en.pdf",
-    x: "https://x.com/HarpeBlue",
+    x: site.profiles.x,
   },
 } as const;

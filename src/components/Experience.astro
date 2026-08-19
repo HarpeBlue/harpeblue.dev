@@ -9,82 +9,193 @@ const { content } = Astro.props;
 const experience = content.experience;
 ---
 
-<section id="experience" class="hb-theme hb-theme--liquid-signal portfolio-section experience" aria-labelledby="experience-title">
-  <div class="hb-hero">
-    <p class="hb-eyebrow">{experience.eyebrow}</p>
-    <h2 id="experience-title" class="portfolio-section-title">{experience.title}</h2>
-    <p class="hb-copy">{experience.description}</p>
-  </div>
+<section id="experience" class="section experience" aria-labelledby="experience-title">
+  <header class="section-heading">
+    <p class="eyebrow">02 / {experience.eyebrow}</p>
+    <h2 id="experience-title" class="section-title">{experience.title}</h2>
+    <p class="section-copy">{experience.description}</p>
+  </header>
 
-  <div class="hb-grid">
-    {
-      experience.items.map((job) => (
-        <article class="hb-card hb-card--accent hb-stack">
-          <header class="experience-card__header">
+  {
+    experience.items.map((job) => (
+      <article class="experience__case">
+        <aside class="experience__outcome" aria-label={experience.outcome.label}>
+          <strong>{experience.outcome.value}</strong>
+          <span>{experience.outcome.label}</span>
+          <p>{experience.outcome.detail}</p>
+        </aside>
+
+        <div class="experience__record">
+          <header class="experience__role">
             <div>
-              <h3 translate="no">{job.company}</h3>
-              <p class="experience-card__role">{job.role}</p>
+              <p class="experience__company" translate="no">{job.company}</p>
+              <h3>{job.role}</h3>
             </div>
-            <p class="experience-card__meta">
-              {job.startDate} - {job.endDate}
-              <br />
-              {job.location}
+            <p class="meta-line experience__meta">
+              <span>{job.period}</span>
+              <span>{job.location}</span>
             </p>
           </header>
 
-          <p>{job.summary}</p>
+          <p class="experience__summary">{job.summary}</p>
 
-          <ul class="experience-card__highlights">
-            {job.highlights.map((highlight) => (
-              <li>{highlight}</li>
-            ))}
-          </ul>
-
-          <div class="hb-row" aria-label={`${job.company} ${experience.technologiesLabel}`}>
-            {job.technologies.map((technology) => (
-              <span class="hb-badge">{technology}</span>
-            ))}
+          <div class="experience__contributions">
+            <p class="experience__label">{experience.contributionsLabel}</p>
+            <ol>
+              {job.highlights.map((highlight) => <li>{highlight}</li>)}
+            </ol>
           </div>
-        </article>
-      ))
-    }
-  </div>
+
+          <div class="experience__toolkit">
+            <p class="experience__label">{experience.technologiesLabel}</p>
+            <ul class="tag-list" aria-label={`${job.company} ${experience.technologiesLabel}`}>
+              {job.technologies.map((technology) => <li class="tag" translate="no">{technology}</li>)}
+            </ul>
+          </div>
+        </div>
+      </article>
+    ))
+  }
 </section>
 
 <style>
-  .experience-card__header {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--hb-space-4);
-    justify-content: space-between;
-  }
-
-  .experience-card__role,
-  .experience-card__meta {
-    margin: 0;
-    color: var(--hb-muted);
-  }
-
-  .experience-card__meta {
-    font-size: 0.9rem;
-    text-align: left;
-  }
-
-  .experience-card__highlights {
+  .experience__case {
     display: grid;
-    gap: var(--hb-space-3);
+    grid-template-columns: minmax(14rem, 0.72fr) minmax(0, 1.7fr);
+    gap: clamp(2.5rem, 7vw, 6rem);
+    align-items: start;
+  }
+
+  .experience__outcome {
+    position: sticky;
+    top: 7rem;
+    padding: clamp(1.35rem, 3vw, 2rem);
+    background:
+      linear-gradient(145deg, rgb(55 120 255 / 24%), rgb(72 234 213 / 4%)),
+      var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 0.25rem;
+    box-shadow: var(--shadow);
+  }
+
+  .experience__outcome strong {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: var(--text);
+    font-size: clamp(2.6rem, 6vw, 5.3rem);
+    font-weight: 900;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  .experience__outcome span,
+  .experience__label {
+    color: var(--cyan);
+    font: 750 0.7rem/1.3 var(--font-mono);
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .experience__outcome p {
+    margin: 1.4rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .experience__record {
+    min-width: 0;
+  }
+
+  .experience__role {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.5rem;
+    align-items: end;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .experience__company {
+    margin: 0 0 0.45rem;
+    color: var(--blue);
+    font: 750 0.75rem/1.2 var(--font-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .experience__role h3 {
     margin: 0;
-    padding-left: 1.2rem;
-    color: var(--hb-muted);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.05em;
+    line-height: 1;
   }
 
-  .experience-card__highlights li::marker {
-    color: var(--hb-secondary);
+  .experience__meta {
+    justify-content: flex-end;
   }
 
-  @media (min-width: 42rem) {
-    .experience-card__meta {
-      text-align: right;
+  .experience__summary {
+    max-width: 54ch;
+    margin: 1.5rem 0 0;
+    color: var(--text-soft);
+    font-size: 1.05rem;
+  }
+
+  .experience__contributions,
+  .experience__toolkit {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .experience__label {
+    margin: 0 0 1rem;
+  }
+
+  .experience__contributions ol {
+    margin: 0;
+    padding: 0;
+    counter-reset: contribution;
+    list-style: none;
+  }
+
+  .experience__contributions li {
+    display: grid;
+    grid-template-columns: 2.7rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 1.2rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    counter-increment: contribution;
+  }
+
+  .experience__contributions li::before {
+    color: var(--blue);
+    content: "0" counter(contribution);
+    font: 700 0.7rem/1.8 var(--font-mono);
+  }
+
+  @media (max-width: 52rem) {
+    .experience__case {
+      grid-template-columns: 1fr;
+    }
+
+    .experience__outcome {
+      position: relative;
+      top: auto;
+      max-width: 27rem;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .experience__role {
+      grid-template-columns: 1fr;
+    }
+
+    .experience__meta {
+      justify-content: flex-start;
+    }
+
+    .experience__meta > * + *::before {
+      content: "/";
     }
   }
 </style>

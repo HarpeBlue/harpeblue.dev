@@ -1,37 +1,201 @@
 ---
 import type { PageContent } from "../data/content/index";
+import { site } from "../data/site";
 
 type Props = {
   content: PageContent;
 };
 
 const { content } = Astro.props;
-const { profile } = content;
+const { profile, contact } = content;
+const year = new Date().getFullYear();
+const displayDomain = site.url.replace("https://", "");
 ---
 
-<section id="contact" class="hb-theme hb-theme--rave-mode portfolio-section contact-cta" aria-labelledby="contact-title">
-  <div class="hb-hero contact-cta__content">
-    <div class="hb-stack">
-      <p class="hb-eyebrow">{content.contact.eyebrow}</p>
-      <h2 id="contact-title" class="portfolio-section-title contact-cta__title">{content.contact.title}</h2>
-      <p class="hb-copy">{content.contact.description}</p>
+<section id="contact" class="section contact" aria-labelledby="contact-title">
+  <div class="contact__panel">
+    <div class="contact__signal" aria-hidden="true">
+      <span>05</span>
+      <span>CHANNEL / OPEN</span>
     </div>
 
-    <nav class="hb-row" aria-label={content.contact.linksLabel}>
-      <a class="hb-button hb-button--secondary" href={profile.links.resume}>{content.contact.resume}</a>
-      <a class="hb-button hb-button--secondary" href={profile.links.email}>{content.contact.email}</a>
-      <a class="hb-button hb-button--secondary" href={profile.links.linkedin}>LinkedIn</a>
-      <a class="hb-button hb-button--secondary" href={profile.links.github}>GitHub</a>
-    </nav>
+    <div class="contact__grid">
+      <div class="contact__copy">
+        <p class="eyebrow">{contact.eyebrow}</p>
+        <h2 id="contact-title">{contact.title}</h2>
+        <p>{contact.description}</p>
+      </div>
+
+      <div class="contact__details">
+        <nav class="actions contact__actions" aria-label={contact.linksLabel}>
+          <a class="action action--primary" href={profile.links.email}>{contact.email}</a>
+          <a class="action" href={profile.links.resume}>{contact.resume}</a>
+          <a class="action" href={profile.links.linkedin}>LinkedIn</a>
+          <a class="action" href={profile.links.github}>GitHub</a>
+        </nav>
+
+        <dl>
+          <div>
+            <dt>{contact.availabilityLabel}</dt>
+            <dd>{profile.availability}</dd>
+          </div>
+          <div>
+            <dt>{contact.locationLabel}</dt>
+            <dd translate="no">{profile.location}</dd>
+          </div>
+          <div>
+            <dt>{contact.profilesLabel}</dt>
+            <dd translate="no">{displayDomain}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <footer class="contact__footer">
+      <p><span translate="no">HarpeBlue</span> / {year}</p>
+      <p>{contact.footerPrefix} <span translate="no">{profile.name}</span>.</p>
+    </footer>
   </div>
 </section>
 
 <style>
-  .contact-cta__content {
-    gap: var(--hb-space-8);
+  .contact {
+    padding-bottom: 0;
   }
 
-  .contact-cta__title {
-    max-width: 16ch;
+  .contact__panel {
+    position: relative;
+    padding: clamp(1.4rem, 5vw, 4rem);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 90% 10%, rgb(72 234 213 / 18%), transparent 26rem),
+      linear-gradient(135deg, rgb(55 120 255 / 35%), transparent 50%),
+      var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: clamp(1rem, 3vw, 2rem);
+    box-shadow: var(--shadow);
+  }
+
+  .contact__panel::after {
+    position: absolute;
+    right: -5rem;
+    bottom: -8rem;
+    width: 23rem;
+    height: 23rem;
+    border: 1px solid rgb(72 234 213 / 20%);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 3rem rgb(72 234 213 / 3%),
+      0 0 0 7rem rgb(109 152 255 / 3%);
+    content: "";
+    pointer-events: none;
+  }
+
+  .contact__signal,
+  .contact__footer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--muted);
+    font: 700 0.68rem/1.4 var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .contact__signal span:first-child {
+    color: var(--cyan);
+  }
+
+  .contact__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(17rem, 0.75fr);
+    gap: clamp(3rem, 9vw, 8rem);
+    align-items: end;
+    padding-block: clamp(4rem, 10vw, 8rem);
+  }
+
+  .contact__copy h2 {
+    max-width: 11ch;
+    margin: 1.2rem 0 1.5rem;
+    color: var(--text);
+    font-size: clamp(3rem, 8.5vw, 7.6rem);
+    font-weight: 900;
+    letter-spacing: -0.075em;
+    line-height: 0.86;
+  }
+
+  .contact__copy > p:last-child {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--text-soft);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+  }
+
+  .contact__details {
+    min-width: 0;
+  }
+
+  .contact__actions {
+    margin-bottom: 2rem;
+  }
+
+  .contact__details dl {
+    margin: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact__details dl > div {
+    display: grid;
+    grid-template-columns: minmax(7rem, 0.7fr) minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.85rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact__details dt,
+  .contact__details dd {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .contact__details dt {
+    color: var(--muted);
+    font: 700 0.68rem/1.5 var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .contact__details dd {
+    overflow-wrap: anywhere;
+    color: var(--text-soft);
+    font-size: 0.88rem;
+  }
+
+  .contact__footer {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .contact__footer p {
+    margin: 0;
+  }
+
+  @media (max-width: 52rem) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .contact__details dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
   }
 </style>

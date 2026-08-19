@@ -5,26 +5,39 @@ export const esContent = {
   path: "/es/",
   alternatePath: "/",
   alternateLabel: "EN",
+  skipLink: "Saltar al contenido principal",
   seo: {
-    title: `${profile.name} - ${profile.role}`,
+    title: `${profile.name} — ${profile.role}`,
     description:
       "Frontend Software Engineer con 5 años de experiencia construyendo interfaces B2B SaaS con React, dashboards complejos, componentes de design system e infraestructura de pruebas frontend.",
+    ogLocale: "es_CO",
+    socialImageAlt: "Harold Peñaloza, Frontend Software Engineer — portfolio HarpeBlue",
   },
   profile: {
     ...profile,
     headline: "Construyo interfaces rápidas y expresivas para productos complejos.",
     summary:
       "Frontend Software Engineer con 5 años de experiencia construyendo interfaces B2B SaaS con React, dashboards complejos, componentes de design system e infraestructura de pruebas frontend.",
+    availability: "Disponible para roles frontend remotos",
   },
   hero: {
-    linksLabel: "Enlaces principales",
+    eyebrow: "Frontend Software Engineer",
+    intro: "Interfaces de producto, design systems, testing y la ingeniería que hay detrás.",
+    linksLabel: "Acciones principales",
+    work: "Ver trabajo seleccionado",
     resume: "CV",
-    contact: "Contacto",
+    contact: "Iniciar una conversación",
+    proofLabel: "Evidencia seleccionada",
+    proofs: [
+      { value: "5 años", label: "React en producción" },
+      { value: "2h → 30m", label: "Pipeline de pruebas frontend" },
+      { value: "Remoto", label: "Desde Colombia" },
+    ],
   },
   navigation: {
     label: "Navegación principal",
+    languageLabel: "Cambiar a inglés",
     items: [
-      { label: "Inicio", href: "#hero" },
       { label: "Experiencia", href: "#experience" },
       { label: "Proyectos", href: "#projects" },
       { label: "Skills", href: "#skills" },
@@ -32,17 +45,24 @@ export const esContent = {
     ],
   },
   experience: {
-    eyebrow: "Experiencia",
-    title: "Frontend real en producción",
+    eyebrow: "Historial en producción",
+    title: "Trabajo frontend que cambió el sistema.",
     description:
-      "Trabajo real de producto en interfaces React, dashboards, migraciones de design system, infraestructura de testing y code review.",
-    technologiesLabel: "tecnologías",
+      "Cinco años dentro de un producto IoT B2B SaaS complejo: entregando interfaces React, migrando fundamentos, mejorando el feedback de pruebas y ayudando al equipo a trabajar con más confianza.",
+    outcome: {
+      value: "2h → 30m",
+      label: "Pipeline de pruebas frontend",
+      detail: "Lideré la migración de Jest a Vitest.",
+    },
+    contributionsLabel: "Contribuciones seleccionadas",
+    technologiesLabel: "Toolkit de producción",
     items: [
       {
         company: "Ubidots S.A.S.",
         role: "Desarrollador Frontend",
         startDate: "2021-02",
         endDate: "2026-04",
+        period: "Febrero de 2021 — abril de 2026",
         location: "Colombia / Remoto",
         summary: "Construí y mantuve funcionalidades frontend en React dentro de una plataforma IoT B2B SaaS.",
         highlights: [
@@ -69,27 +89,27 @@ export const esContent = {
     ],
   },
   projects: {
-    eyebrow: "Trabajo seleccionado",
-    title: "Proyectos con prueba real",
+    eyebrow: "Sistemas seleccionados",
+    title: "Proyectos con una razón para existir.",
     description:
-      "Una selección pequeña de proyectos que muestran ejecución frontend, sistemas visuales, documentación y flujos prácticos de desarrollo.",
+      "Una selección compacta de proyectos que muestran criterio visual, documentación, entrega estática y flujos prácticos para desarrollo.",
     technologiesLabel: "tecnologías",
-    linksLabel: "enlaces",
-    repository: "Repositorio",
-    demo: "Demo",
+    linksLabel: "enlaces del proyecto",
+    repository: "Código",
+    demo: "Proyecto en vivo",
     items: [
       {
-        name: "harpeblue.dev",
+        name: "harpeblue.com",
         description:
-          "Portfolio profesional construido como sitio rápido y estático para presentar experiencia frontend, proyectos e identidad visual HarpeBlue.",
-        repositoryUrl: "https://github.com/HarpeBlue/harpeblue.dev",
-        demoUrl: "https://harpeblue.dev",
+          "Portfolio profesional rápido, bilingüe y static-first para presentar experiencia frontend, evidencia e identidad HarpeBlue en evolución.",
+        repositoryUrl: "https://github.com/HarpeBlue/harpeblue.com",
+        demoUrl: "https://harpeblue.com",
         status: "Activo",
         highlights: [
           "Construido con Astro para priorizar performance, SEO, mantenibilidad y despliegue estático.",
-          "Usa HarpeBlue Signal como dependencia real de design system en vez de recrear patrones visuales localmente.",
+          "Tiene un sistema visual local compacto y una arquitectura de contenido bilingüe sin runtime de aplicación en el cliente.",
         ],
-        technologies: ["Astro", "TypeScript", "CSS", "HarpeBlue Signal"],
+        technologies: ["Astro", "TypeScript", "CSS", "HTML accesible"],
       },
       {
         name: "HarpeBlue Signal",
@@ -120,35 +140,54 @@ export const esContent = {
     ],
   },
   skills: {
-    eyebrow: "Skills",
-    title: "Capacidades frontend",
+    eyebrow: "Matriz de capacidades",
+    title: "Cómo abordo el trabajo frontend.",
     description:
-      "Tecnologías y prácticas agrupadas por cómo aparecen en trabajo frontend real: UI de producto, flujos de datos, testing, tooling y sistemas.",
+      "Las herramientas importan, pero la señal útil está en dónde aparecen: UI de producto, datos, testing, tooling y sistemas reutilizables.",
     groups: [
       {
-        category: "Frontend",
+        category: "UI de producto",
+        description: "Interfaces responsive y patrones reutilizables de producto.",
         items: ["React", "JavaScript", "TypeScript", "HTML", "CSS", "styled-components"],
       },
-      { category: "Estado y Datos", items: ["Redux", "Context API", "React Query", "Formik"] },
-      { category: "Testing", items: ["Jest", "Vitest", "React Testing Library", "Cypress"] },
-      { category: "Tooling", items: ["Webpack", "Rspack", "Git", "GitHub", "npm"] },
       {
-        category: "UI Systems",
-        items: ["Design systems", "Responsive UI", "Dashboards", "Componentes reutilizables"],
+        category: "Estado y Datos",
+        description: "Estado predecible en cliente y datos asíncronos de producto.",
+        items: ["Redux", "Context API", "React Query", "Formik"],
+      },
+      {
+        category: "Testing",
+        description: "Feedback rápido desde componentes hasta flujos completos en navegador.",
+        items: ["Jest", "Vitest", "React Testing Library", "Cypress"],
+      },
+      {
+        category: "Tooling",
+        description: "Sistemas de build y fundamentos cotidianos de ingeniería.",
+        items: ["Webpack", "Rspack", "Git", "GitHub", "npm"],
+      },
+      {
+        category: "Sistemas de UI",
+        description: "Consistencia en interfaces complejas que siguen evolucionando.",
+        items: ["Design systems", "UI responsive", "Dashboards", "Componentes reutilizables"],
       },
       {
         category: "Workflow",
+        description: "Cambios comprensibles, revisables y más seguros.",
         items: ["Code review", "Migraciones frontend", "Linux", "Desarrollo asistido por IA"],
       },
     ],
   },
   contact: {
-    eyebrow: "Contacto",
-    title: "Construyamos algo rápido y memorable.",
+    eyebrow: "Canal abierto",
+    title: "Tráeme la interfaz que necesita claridad.",
     description:
-      "Abierto a roles remotos como Frontend Software Engineer enfocados en React, UI de producto, design systems, testing y flujos de desarrollo asistidos por IA.",
+      "Estoy abierto a roles remotos como Frontend Software Engineer centrados en React, UI de producto, design systems, testing y flujos cuidadosos asistidos por IA.",
     linksLabel: "Enlaces de contacto",
     resume: "CV",
-    email: "Email",
+    email: "Escríbeme",
+    availabilityLabel: "Disponibilidad",
+    locationLabel: "Ubicación",
+    profilesLabel: "Perfiles profesionales",
+    footerPrefix: "Diseñado y construido por",
   },
 } as const;

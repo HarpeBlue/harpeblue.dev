@@ -1,5 +1,3 @@
 export { content } from "./content/index";
 export { profile } from "./profile";
-export { experience } from "./experience";
-export { projects } from "./projects";
-export { skills } from "./skills";
+export { absoluteUrl, languageAlternates, site } from "./site";

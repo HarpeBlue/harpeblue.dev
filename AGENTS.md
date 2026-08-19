@@ -2,16 +2,15 @@
 
 ## Project
 
-`harpeblue.dev` is the professional portfolio for Harold Peñaloza / HarpeBlue.
+`harpeblue.com` is the professional portfolio for Harold Peñaloza / HarpeBlue.
 
-The site should remain fast, clear, bilingual, accessible, and visually aligned with HarpeBlue Signal.
+The site should remain fast, clear, bilingual, accessible, and visually aligned with the dark HarpeBlue identity.
 
 ## Stack
 
 - Astro
 - TypeScript
 - CSS
-- `@harpeblue/signal`
 - Static deployment through Vercel
 
 ## Commands
@@ -33,24 +32,19 @@ Use `npm run build` before considering implementation work complete.
 - `src/data/content/en.ts` contains English content.
 - `src/data/content/es.ts` contains Spanish content.
 - `src/data/content/index.ts` combines localized content.
+- `src/data/site.ts` owns canonical site identity, routes, and public links.
 - `src/layouts/BaseLayout.astro` owns document structure and metadata.
 - `src/styles/global.css` owns portfolio-level global styles.
 
 Keep content separate from presentation. Prefer updating localized data files instead of hardcoding copy inside components.
 
-## HarpeBlue Signal
+## Visual Ownership
 
-- Use `@harpeblue/signal` classes first for recurring visual patterns.
-- Use local CSS only for portfolio-specific layout or composition.
-- Do not recreate buttons, badges, cards, shell/page containers, or theme behavior locally if Signal already provides them.
-- If a visual pattern will be reused across HarpeBlue projects, propose adding it to `@harpeblue/signal` instead of duplicating it here.
-
-Preferred ownership model:
-
-```txt
-HarpeBlue Signal -> identity, tokens, reusable components.
-Portfolio CSS    -> section composition and project-specific layout.
-```
+- Keep this portfolio's tokens, primitives, and composition local to the repository.
+- Do not add `@harpeblue/signal` as a runtime dependency; HarpeBlue Signal remains a separate portfolio project.
+- Keep the local visual foundation intentionally small: one dark identity, a bounded token set, and only the primitives used by this site.
+- Prefer component-scoped CSS for section composition and `src/styles/global.css` for tokens, reset, accessibility helpers, and genuinely shared primitives.
+- If a visual pattern later proves reusable across multiple HarpeBlue projects, propose it separately instead of coupling this portfolio to a general library preemptively.
 
 ## Bilingual Content
 
@@ -69,7 +63,7 @@ Portfolio CSS    -> section composition and project-specific layout.
 
 ## SEO And Deployment
 
-- Keep canonical URLs aligned with `https://harpeblue.dev/` and `https://harpeblue.dev/es/`.
+- Keep canonical URLs aligned with `https://harpeblue.com/` and `https://harpeblue.com/es/`.
 - Keep alternate language metadata for `en`, `es`, and `x-default`.
 - Keep public CV files under `public/resume/`.
 - Do not expose private phone-number CV versions in `public/`.

@@ -6,107 +6,145 @@ type Props = {
 };
 
 const { content } = Astro.props;
+const alternateLanguage = content.locale === "en" ? "es" : "en";
 ---
 
-<header class="site-nav hb-theme hb-theme--liquid-signal">
-  <nav class="site-nav__inner" aria-label={content.navigation.label}>
-    <a class="site-nav__brand" href="#hero" translate="no">{content.profile.alias}</a>
+<header class="site-nav">
+  <nav class="site-nav__inner page-shell" aria-label={content.navigation.label}>
+    <a class="site-nav__brand" href="#hero" translate="no">
+      <span class="site-nav__mark" aria-hidden="true">HB</span>
+      <span>HarpeBlue</span>
+    </a>
+
     <div class="site-nav__links">
       {
         content.navigation.items.map((item) => (
           <a class="site-nav__link" href={item.href}>{item.label}</a>
         ))
       }
-      <a class="site-nav__link site-nav__link--language" href={content.alternatePath}>{content.alternateLabel}</a>
     </div>
+
+    <a
+      class="site-nav__locale"
+      href={content.alternatePath}
+      hreflang={alternateLanguage}
+      lang={alternateLanguage}
+      aria-label={content.navigation.languageLabel}
+    >
+      {content.alternateLabel}
+    </a>
   </nav>
 </header>
 
 <style>
   .site-nav {
     position: sticky;
+    z-index: 50;
     top: 0;
-    z-index: 10;
-    width: min(100% - 2rem, 74rem);
-    margin: var(--hb-space-3) auto 0;
-    background: color-mix(in srgb, var(--hb-surface) 78%, transparent);
-    border: 1px solid color-mix(in srgb, var(--hb-border) 80%, transparent);
-    border-radius: var(--hb-radius-pill);
-    box-shadow: var(--hb-shadow-soft);
+    border-bottom: 1px solid var(--line);
+    background: rgb(5 8 22 / 82%);
+    box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 16%);
     backdrop-filter: blur(18px);
   }
 
   .site-nav__inner {
-    display: flex;
-    gap: var(--hb-space-4);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 1rem;
     align-items: center;
-    justify-content: space-between;
-    min-height: 3rem;
-    padding: 0.35rem 0.45rem 0.35rem 1rem;
+    min-height: 4.5rem;
   }
 
   .site-nav__brand,
-  .site-nav__link {
-    color: var(--hb-text);
-    font: 800 0.75rem/1 var(--hb-font-ui);
-    letter-spacing: 0.08em;
+  .site-nav__link,
+  .site-nav__locale {
     text-decoration: none;
-    text-transform: uppercase;
   }
 
   .site-nav__brand {
-    color: var(--hb-secondary);
+    display: inline-flex;
+    gap: 0.7rem;
+    align-items: center;
+    color: var(--text);
+    font: 850 0.78rem/1 var(--font-mono);
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .site-nav__mark {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    color: var(--canvas);
+    background: var(--cyan);
+    border-radius: 0.5rem 0.5rem 0.5rem 0.12rem;
+    font-size: 0.65rem;
+    letter-spacing: -0.04em;
   }
 
   .site-nav__links {
     display: flex;
     gap: 0.2rem;
     align-items: center;
-    overflow-x: auto;
-    scrollbar-width: none;
+    justify-content: flex-end;
   }
 
-  .site-nav__links::-webkit-scrollbar {
-    display: none;
-  }
-
-  .site-nav__link {
-    padding: 0.7rem 0.8rem;
-    color: var(--hb-muted);
-    border-radius: var(--hb-radius-pill);
-    white-space: nowrap;
+  .site-nav__link,
+  .site-nav__locale {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.75rem;
+    color: var(--muted);
+    border-radius: 999px;
+    font: 750 0.72rem/1 var(--font-mono);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    transition:
+      color 160ms ease,
+      background-color 160ms ease;
   }
 
   .site-nav__link:hover,
-  .site-nav__link:focus-visible {
-    color: var(--hb-text);
-    background: color-mix(in srgb, var(--hb-primary) 16%, transparent);
-    outline: none;
+  .site-nav__locale:hover {
+    color: var(--text);
+    background: rgb(109 152 255 / 12%);
   }
 
-  .site-nav__link--language {
-    color: var(--hb-secondary);
-    background: color-mix(in srgb, var(--hb-secondary) 10%, transparent);
+  .site-nav__locale {
+    min-width: 2.75rem;
+    color: var(--cyan);
+    border: 1px solid var(--line-strong);
   }
 
-  @media (max-width: 48rem) {
-    .site-nav {
-      width: min(100% - 1rem, 42rem);
-      border-radius: var(--hb-radius-lg);
-    }
-
+  @media (max-width: 42rem) {
     .site-nav__inner {
-      display: grid;
-      gap: var(--hb-space-2);
-      padding: 0.75rem;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.55rem 0.75rem;
+      min-height: auto;
+      padding-block: 0.65rem 0.7rem;
     }
 
     .site-nav__links {
-      width: 100%;
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.25rem;
     }
 
     .site-nav__link {
-      padding-inline: 0.75rem;
+      min-width: 0;
+      padding-inline: 0.25rem;
+      font-size: clamp(0.58rem, 3vw, 0.7rem);
+      letter-spacing: 0.035em;
+    }
+  }
+
+  @media (max-width: 22rem) {
+    .site-nav__links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

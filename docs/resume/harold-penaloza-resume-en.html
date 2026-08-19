@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Harold Peñaloza — Frontend Software Engineer</title>
+    <style>
+      @page {
+        size: Letter;
+        margin: 0.46in 0.54in;
+      }
+
+      :root {
+        color: #172033;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 9.4pt;
+        line-height: 1.36;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.18in 0.35in;
+        align-items: end;
+        padding-bottom: 0.14in;
+        border-bottom: 2px solid #3778ff;
+      }
+
+      h1 {
+        margin: 0 0 0.035in;
+        color: #0a1733;
+        font-size: 24pt;
+        letter-spacing: -0.8pt;
+        line-height: 1;
+      }
+
+      .role {
+        margin: 0;
+        color: #2f65d8;
+        font-size: 11.2pt;
+        font-weight: 700;
+      }
+
+      .location {
+        margin: 0.055in 0 0;
+        color: #536078;
+      }
+
+      .contact {
+        display: grid;
+        gap: 0.028in;
+        justify-items: end;
+        color: #34415b;
+        font-size: 8.8pt;
+      }
+
+      section {
+        break-inside: avoid;
+        margin-top: 0.14in;
+      }
+
+      h2 {
+        margin: 0 0 0.065in;
+        color: #2f65d8;
+        font-size: 8.8pt;
+        letter-spacing: 1.1pt;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      h3 {
+        margin: 0;
+        color: #101a2e;
+        font-size: 10.4pt;
+        line-height: 1.2;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .entry-heading {
+        display: flex;
+        gap: 0.15in;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 0.035in;
+      }
+
+      .entry-meta {
+        flex: 0 0 auto;
+        color: #5b667b;
+        font-size: 8.6pt;
+      }
+
+      .entry + .entry {
+        margin-top: 0.11in;
+      }
+
+      ul {
+        margin: 0.035in 0 0;
+        padding-left: 0.18in;
+      }
+
+      li {
+        margin: 0 0 0.022in;
+        padding-left: 0.02in;
+      }
+
+      li::marker {
+        color: #3778ff;
+      }
+
+      .project-copy {
+        color: #3d4960;
+      }
+
+      .project-links {
+        margin-top: 0.02in;
+        color: #2f65d8;
+        font-size: 8.6pt;
+      }
+
+      .skills-grid {
+        display: grid;
+        gap: 0.035in;
+      }
+
+      .skills-grid strong {
+        color: #111b2e;
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: 1fr 0.72fr;
+        gap: 0.3in;
+      }
+
+      .small-copy {
+        color: #46536a;
+        font-size: 8.9pt;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Harold Peñaloza</h1>
+        <p class="role">Frontend Software Engineer</p>
+        <p class="location">Granada, Meta, Colombia · Remote</p>
+      </div>
+      <div class="contact">
+        <a href="mailto:hello@harpeblue.com">hello@harpeblue.com</a>
+        <a href="https://harpeblue.com">harpeblue.com</a>
+        <a href="https://www.linkedin.com/in/harpeblue/">linkedin.com/in/harpeblue</a>
+        <a href="https://github.com/HarpeBlue">github.com/HarpeBlue</a>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h2>Summary</h2>
+        <p>
+          Frontend Software Engineer with 5 years of React experience building B2B SaaS interfaces, complex
+          dashboards, design-system components, and frontend testing infrastructure. Strong ownership record across
+          migrations, production bugs, reusable UI, and AI-assisted development workflows. Focused on fast,
+          maintainable interfaces and continuous improvement of engineering fundamentals.
+        </p>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        <div class="entry">
+          <div class="entry-heading">
+            <h3>Ubidots S.A.S. — Frontend Developer</h3>
+            <span class="entry-meta">February 2021 — April 2026 · Colombia / Remote</span>
+          </div>
+          <ul>
+            <li>
+              Built and maintained React-based frontend features across the Ubidots IoT platform, including
+              dashboards, widgets, organizations, data tables, forms, and enterprise-facing workflows.
+            </li>
+            <li>
+              Reduced frontend test pipeline time from roughly 2 hours to 30 minutes by leading the migration from
+              Jest to Vitest.
+            </li>
+            <li>
+              Led the frontend migration of the Organizations module to the internal Vulcan UI design system,
+              delivering independently with tests and no critical production bugs.
+            </li>
+            <li>
+              Created and maintained reusable components for Vulcan UI, helping standardize product interfaces across
+              the platform.
+            </li>
+            <li>
+              Migrated legacy views, widgets, and table flows toward modern frontend patterns using React Query,
+              shared UI components, and reusable abstractions.
+            </li>
+            <li>
+              Supported the React 16 to 17 upgrade and dependency modernization work across a large production
+              frontend codebase.
+            </li>
+            <li>
+              Reviewed code regularly to improve maintainability, prevent production issues, and align implementation
+              with team standards.
+            </li>
+            <li>Helped onboard engineers into complex repositories, tooling, and frontend workflows.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+        <div class="entry">
+          <h3>HarpeBlue Signal</h3>
+          <p class="project-copy">
+            Framework-agnostic visual identity system built with CSS tokens, themes, utilities, and examples.
+          </p>
+          <p class="project-links">
+            github.com/HarpeBlue/harpeblue-signal · harpeblue.github.io/harpeblue-signal
+          </p>
+          <ul>
+            <li>Created a reusable visual foundation without depending on a specific frontend framework.</li>
+            <li>Built a public playground and documentation examples using pure CSS and lightweight JavaScript.</li>
+            <li>Designed visual modes including Liquid Signal, Terminal Lab, Retro Signal, and Rave Mode.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Omarchy / Terminal Lab Cheatsheets</h3>
+          <p class="project-copy">Technical cheatsheet project using HarpeBlue Signal's Terminal Lab style.</p>
+          <ul>
+            <li>Built as the foundation for a growing collection of personal and public developer references.</li>
+            <li>Focused on fast lookup, readable command documentation, and practical Linux workflows.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <p><strong>Frontend:</strong> React, JavaScript, TypeScript, HTML, CSS, styled-components</p>
+          <p><strong>State and Data:</strong> Redux, Context API, React Query, Formik</p>
+          <p><strong>Testing:</strong> Jest, Vitest, React Testing Library, Cypress</p>
+          <p><strong>Tooling:</strong> Webpack, Rspack, Git, GitHub, npm</p>
+          <p><strong>UI Systems:</strong> Design systems, responsive UI, dashboards, reusable components</p>
+          <p><strong>Workflow:</strong> Code review, frontend migrations, Linux, AI-assisted development</p>
+        </div>
+      </section>
+
+      <div class="two-column">
+        <section>
+          <h2>Education</h2>
+          <h3>Platzi Master, Cohort 2</h3>
+          <p class="small-copy">
+            Practical software development training focused on collaborative engineering projects and technical
+            growth.
+          </p>
+        </section>
+        <section>
+          <h2>Languages</h2>
+          <p class="small-copy"><strong>Spanish:</strong> Native</p>
+          <p class="small-copy"><strong>English:</strong> Intermediate</p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
