@@ -11,7 +11,7 @@ The site should remain fast, clear, bilingual, accessible, and visually aligned 
 - Astro
 - TypeScript
 - CSS
-- Static deployment through Vercel
+- Static deployment through Cloudflare Workers Static Assets
 
 ## Commands
 
@@ -24,6 +24,15 @@ npm run preview
 ```
 
 Use `npm run build` before considering implementation work complete.
+
+Production is connected to the `HarpeBlue/harpeblue.com` repository through Cloudflare Workers Builds:
+
+- Worker project: `harpeblue-com`
+- Production branch: `main`
+- Root directory: `/`
+- Node.js: `22.12.0`
+- Build command: `npm run build`
+- Deploy command: `npx wrangler@latest deploy --assets ./dist --name harpeblue-com --compatibility-date 2026-08-18`
 
 ## Architecture
 
@@ -67,7 +76,9 @@ Keep content separate from presentation. Prefer updating localized data files in
 - Keep alternate language metadata for `en`, `es`, and `x-default`.
 - Keep public CV files under `public/resume/`.
 - Do not expose private phone-number CV versions in `public/`.
-- Vercel deploys from `main` after push.
+- Cloudflare Workers Builds deploys from `main` after push.
+- Keep `harpeblue.com` as the production custom domain and preserve the permanent, path/query-safe redirect from `www.harpeblue.com` to the apex.
+- `harpeblue.dev` is intentionally retired and must not be treated as a deployment or redirect requirement.
 
 ## Git
 

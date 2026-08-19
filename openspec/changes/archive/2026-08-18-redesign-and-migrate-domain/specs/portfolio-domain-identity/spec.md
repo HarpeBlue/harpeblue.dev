@@ -44,16 +44,16 @@ The public English CV SHALL show the new domain and email address, preserve the 
 - **WHEN** a visitor downloads the public CV
 - **THEN** its visible and extractable text uses `harpeblue.com` and `hello@harpeblue.com` without a phone number or local filesystem URL
 
-### Requirement: Domain aliases preserve navigation
-The production deployment SHALL permanently redirect `www.harpeblue.com`, `harpeblue.dev`, and `www.harpeblue.dev` requests to the HTTPS apex `harpeblue.com` host while preserving the requested path and query string.
-
-#### Scenario: Legacy Spanish URL
-- **WHEN** a visitor requests `https://www.harpeblue.dev/es/` with any query string
-- **THEN** the deployment returns a permanent redirect to the equivalent `https://harpeblue.com/es/` URL with that query string preserved
+### Requirement: The www alias preserves navigation
+The production deployment SHALL permanently redirect `www.harpeblue.com` requests to the HTTPS apex `harpeblue.com` host while preserving the requested path and query string. The retired `harpeblue.dev` domain is outside the production migration contract and is not required to resolve or redirect after its registration expires.
 
 #### Scenario: New www alias
 - **WHEN** a visitor requests a route on `https://www.harpeblue.com`
 - **THEN** the deployment permanently redirects to the same route on `https://harpeblue.com`
+
+#### Scenario: Retired legacy domain expires
+- **WHEN** the intentionally non-renewed `harpeblue.dev` registration or its existing DNS configuration stops serving traffic
+- **THEN** the `harpeblue.com` production deployment remains complete without providing a legacy-domain redirect
 
 ### Requirement: Locales preserve proper nouns
 English and Spanish pages SHALL preserve the exact spellings of Harold Peñaloza, HarpeBlue, HarpeBlue Signal, Ubidots S.A.S., Omarchy, and Terminal Lab and SHALL protect rendered proper nouns from browser translation where practical.

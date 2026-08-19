@@ -1,67 +1,92 @@
-# Domain Cutover Checklist
+# Cloudflare Production Runbook
 
-This runbook separates repository readiness from the owner-controlled production migration. The site code can be ready while DNS, email, and Vercel are still pending.
+This runbook records the live production configuration for the static Astro portfolio. Repository readiness, Cloudflare deployment, web routing, and inbound email are tracked separately so a failure in one area does not lead to destructive changes in another.
 
 ## Readiness snapshot
 
 Last checked: 2026-08-18 (America/Bogota).
 
-| Area | Status | Evidence / next gate |
+| Area | Status | Evidence / operating note |
 | --- | --- | --- |
-| Repository | Ready for owner review | `npm run build` produces `/`, `/es/`, `/robots.txt`, and `/sitemap.xml` as static output with `.com` canonicals. |
-| `harpeblue.com` web DNS | Pending | No A/AAAA response; an HTTPS request cannot resolve the host. |
-| `www.harpeblue.com` web DNS | Pending | No CNAME response. |
-| `harpeblue.com` mail DNS | Partially configured | MX currently answers `1 smtp.google.com.`; this does not prove that `hello@harpeblue.com` can receive mail. |
-| Mailbox delivery | Unverified | Send and reply to a real test message before publishing the address. |
-| Legacy `.dev` site | Live | `harpeblue.dev` resolves to `216.198.79.1`, returns a Vercel `307` to `www.harpeblue.dev`, and the `www` destination returns `200`. |
-| Vercel domains | Unverified / not changed | No production project or domain setting was mutated during repository work. |
+| Repository | Deployed | `main` is connected to Cloudflare Workers Builds; `npm run build` produces the English and Spanish pages plus the discovery endpoints. |
+| Cloudflare Worker | Active | Project `harpeblue-com` serves the static `dist/` output. |
+| `harpeblue.com` | Live | The Worker custom domain returns `200` over a Cloudflare-managed HTTPS certificate. |
+| `www.harpeblue.com` | Live redirect | A proxied CNAME and Redirect Rule return `301` to the apex while preserving path and query string. |
+| Email Routing DNS | Active | Cloudflare manages the MX, SPF, and DKIM records used by Email Routing. Do not edit locked routing records manually. |
+| Inbound mailbox | Verified | A real external message sent to `hello@harpeblue.com` arrived at the verified destination address. |
+| Outbound mailbox | Deferred | Sending as `hello@harpeblue.com` is intentionally not configured; choose an SMTP provider only when a reply is needed. |
+| `harpeblue.dev` | Retired | Renewal is disabled. The domain may stop resolving and has no redirect or production-readiness requirement. |
 
-## Before deployment
+## Cloudflare Workers configuration
 
-- [ ] Confirm `hello@harpeblue.com` exists, receives an external test message, and can reply with valid SPF/DKIM alignment.
-- [ ] Add `harpeblue.com`, `www.harpeblue.com`, `harpeblue.dev`, and `www.harpeblue.dev` to the same Vercel project.
-- [ ] Select `harpeblue.com` as the primary production domain.
-- [ ] Copy the exact DNS records Vercel provides into the authoritative DNS zone; do not guess an IP or CNAME.
-- [ ] Keep the existing MX and other mail records intact while changing web records.
-- [ ] Confirm Vercel has issued certificates for the apex, `www`, and both legacy hosts.
-- [ ] Review the uncommitted repository diff, approve a gitmoji commit, and push `main` to trigger the production deployment.
-
-## Redirect policy
-
-Configure permanent redirects so every old or secondary host lands on the apex `.com` host while preserving path and query string:
+Cloudflare Builds is connected to `HarpeBlue/harpeblue.com` with this production configuration:
 
 ```text
-http://harpeblue.com/*      → https://harpeblue.com/*
-https://www.harpeblue.com/* → https://harpeblue.com/*
-https://harpeblue.dev/*     → https://harpeblue.com/*
-https://www.harpeblue.dev/* → https://harpeblue.com/*
+Project:          harpeblue-com
+Production branch: main
+Root directory:   /
+Node.js:          22.12.0
+Build command:    npm run build
+Deploy command:   npx wrangler@latest deploy --assets ./dist --name harpeblue-com --compatibility-date 2026-08-18
+Output directory: dist/
+Custom domain:    harpeblue.com
 ```
 
-Use `308` or `301` after the new deployment has been validated. Test a nested path with a query, for example `/es/?source=legacy`, rather than checking only the homepage.
+Pushes to `main` trigger a production build. Keep preview builds enabled for non-production branches and keep deployment credentials in Cloudflare rather than committing them to the repository.
 
-## Post-deploy verification
+## Web DNS and redirect policy
 
-- [ ] `https://harpeblue.com/` returns `200`; `https://harpeblue.com/es/` returns `200`.
-- [ ] `www` and both `.dev` hosts permanently redirect to the matching `.com` path and preserve query strings.
-- [ ] The English canonical is `https://harpeblue.com/`; the Spanish canonical is `https://harpeblue.com/es/`.
-- [ ] Both pages expose absolute `en`, `es`, and `x-default` alternate links.
-- [ ] `/robots.txt`, `/sitemap.xml`, `/social-card.png`, `/favicon.svg`, and the public CV return `200`.
-- [ ] Open Graph/Twitter preview tools can fetch the 1200×630 PNG without authentication.
-- [ ] The CV contains `hello@harpeblue.com` and `harpeblue.com` and exposes no phone number.
-- [ ] Navigation, language switching, email, CV, LinkedIn, GitHub, project source, and project demo links work in both locales.
-- [ ] A real message to `hello@harpeblue.com` arrives after DNS propagation.
-- [ ] Keep `.dev` ownership and redirects active during the search/user migration period.
+- The apex is attached to `harpeblue-com` as a Worker custom domain.
+- `www.harpeblue.com` is a proxied CNAME targeting `harpeblue.com`.
+- The active Cloudflare Redirect Rule is named `Redirect www to apex`.
+- Requests matching `http*://www.harpeblue.com/*` receive a `301` to the corresponding `https://harpeblue.com/*` path with their query string preserved.
+- HTTPS certificates for the apex and `www` are issued and renewed automatically by Cloudflare.
+- `harpeblue.dev` and `www.harpeblue.dev` are intentionally outside this routing policy.
+
+## Email Routing configuration
+
+- Routing domain: `harpeblue.com`.
+- Public address: `hello@harpeblue.com`.
+- Action: forward to the verified destination address in the Cloudflare account.
+- Catch-all: disabled with the default drop action.
+- DNS: Cloudflare-managed MX, SPF, and DKIM records are active and locked where required.
+- Outbound sending: not configured and not a website production gate.
+
+Do not unlock or replace the Email Routing records when changing web DNS. A DMARC policy and outbound provider can be configured separately when sending from the custom address becomes necessary.
+
+## Verified production checks
+
+- [x] `https://harpeblue.com/` returns `200`.
+- [x] `https://harpeblue.com/es/` returns `200`.
+- [x] `https://www.harpeblue.com/es/?source=runbook` returns `301` to `https://harpeblue.com/es/?source=runbook`.
+- [x] The English and Spanish pages publish the expected `.com` canonicals plus absolute `en`, `es`, and `x-default` alternates.
+- [x] `/robots.txt`, `/sitemap.xml`, `/social-card.png`, `/favicon.svg`, and the public CV return `200`.
+- [x] The social card is a local 1200×630 PNG.
+- [x] The public CV contains `hello@harpeblue.com` and `harpeblue.com` without a phone number or local filesystem path.
+- [x] Navigation, locale switching, contact, CV, profile, project source, and project demo links were checked in both locales.
+- [x] A real external message to `hello@harpeblue.com` arrived through Cloudflare Email Routing.
 
 Useful read-only checks:
 
 ```bash
-dig +short harpeblue.com A
+npm run build
 dig +short harpeblue.com MX
 dig +short www.harpeblue.com CNAME
 curl -I https://harpeblue.com/
-curl -I 'https://harpeblue.dev/es/?source=legacy'
+curl -I https://harpeblue.com/es/
+curl -I 'https://www.harpeblue.com/es/?source=runbook'
 ```
+
+## Deferred follow-ups
+
+- Add a DMARC record when the desired enforcement policy is chosen.
+- Configure outbound sending only when a response from `hello@harpeblue.com` is needed.
+- Optionally submit `https://harpeblue.com/sitemap.xml` to search-engine webmaster tools.
+
+These follow-ups do not block the current website or inbound mailbox.
 
 ## Rollback
 
-If the new deployment or routing fails, restore the last known-good Vercel production deployment and temporarily return the previous `.dev` primary-domain routing. Do not remove the new repository work or mail DNS; correct the failing deployment/domain configuration, rebuild locally, and repeat the verification list before trying the cutover again.
+If a new build fails, open **Workers & Pages → harpeblue-com → Deployments** and restore the last known-good Worker version. Verify the `workers.dev` deployment URL before changing the custom-domain route.
+
+If the failure is limited to the `www` redirect, disable or restore only the affected Redirect Rule; do not remove the apex Worker custom domain. Leave the locked Email Routing DNS records untouched during any web rollback. After correction, run the local build and the production checks above before promoting another deployment.

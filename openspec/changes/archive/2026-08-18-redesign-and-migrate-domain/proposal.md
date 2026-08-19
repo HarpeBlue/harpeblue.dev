@@ -5,7 +5,7 @@ The portfolio is moving from `harpeblue.dev` to the broader `harpeblue.com` iden
 ## What Changes
 
 - Make `https://harpeblue.com/` and `https://harpeblue.com/es/` the canonical English and Spanish URLs, and align repository metadata, visible project content, public contact details, and the public CV with the new domain.
-- Define the deployment expectation that `www.harpeblue.com` and legacy `harpeblue.dev` URLs redirect to the canonical apex domain while preserving the route path; keep external DNS/Vercel setup explicit because it cannot be completed by repository code alone.
+- Define the deployment expectation that `www.harpeblue.com` redirects to the canonical apex domain while preserving the route path and query string. Treat `harpeblue.dev` as intentionally retired, with no renewal or redirect requirement, and keep external Cloudflare Workers/DNS setup explicit because it cannot be completed by repository code alone.
 - Remove `@harpeblue/signal` as a runtime dependency and replace its tokens, themes, utilities, and component classes with a small portfolio-owned CSS foundation. HarpeBlue Signal remains a portfolio project; only this site's dependency on it is removed.
 - Redesign the page as an evidence-led, technical editorial experience with stronger hierarchy, asymmetric composition, clear impact metrics, differentiated project treatments, and restrained motion.
 - Make every navigation destination and language control usable at desktop and mobile widths, including keyboard operation, visible focus, reduced-motion behavior, and a skip link.
@@ -31,5 +31,5 @@ None. The project has no existing OpenSpec capability specifications.
 - Affects both Astro routes, the base layout, all portfolio section components, localized content, shared profile/site data, global CSS, public brand/social assets, and the public English CV.
 - Removes `@harpeblue/signal` from `package.json` and `package-lock.json`; Astro remains the only runtime dependency unless implementation proves a small build-time integration necessary.
 - Updates repository guidance and README references so future work follows the new domain and portfolio-owned styling model.
-- Requires post-push domain configuration in Vercel/DNS and verification of the `hello@harpeblue.com` mailbox before public cutover; those external mutations are not implied by repository implementation.
+- Requires post-push deployment and domain configuration in Cloudflare Workers/DNS plus verification of the `hello@harpeblue.com` inbound route before public cutover; those external mutations require separate owner authorization.
 - Does not add unsupported technologies, employment claims, project outcomes, analytics, a CMS, or client-side application state.

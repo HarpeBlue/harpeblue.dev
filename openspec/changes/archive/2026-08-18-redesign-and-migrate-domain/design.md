@@ -4,7 +4,7 @@ See `proposal.md` for motivation and the three delta specs for observable behavi
 
 The current Astro site renders the same component tree for `/` and `/es/`, with localized data in `src/data/content/`. That separation is worth preserving. Presentation currently depends on one imported Signal stylesheet and many `hb-*` tokens/classes; local component styles only compose those primitives. The result is technically lean but visually repetitive, and the mobile navigation hides destinations in an unmarked horizontal scroller.
 
-Domain values are repeated across routes, layout defaults, content, profile data, package metadata, README/guidance, and a binary PDF. There are also unused duplicate `experience`, `projects`, and `skills` modules exported from `src/data/index.ts`, making future identity/content drift more likely. The current public CV contains the old site/email plus an extractable local `file://` source path. As of exploration on 2026-08-18, `harpeblue.com` and `www.harpeblue.com` did not resolve, while `harpeblue.dev` redirected to `www.harpeblue.dev` on Vercel; repository work therefore cannot be treated as production cutover.
+Domain values are repeated across routes, layout defaults, content, profile data, package metadata, README/guidance, and a binary PDF. There are also unused duplicate `experience`, `projects`, and `skills` modules exported from `src/data/index.ts`, making future identity/content drift more likely. The current public CV contains the old site/email plus an extractable local `file://` source path. As of initial exploration on 2026-08-18, `harpeblue.com` and `www.harpeblue.com` did not resolve, while `harpeblue.dev` redirected to `www.harpeblue.dev` on Vercel. The owner subsequently deployed the `.com` site through Cloudflare Workers and chose not to renew `.dev`; the retired domain is therefore intentionally outside the redirect contract.
 
 ## Goals / Non-Goals
 
@@ -15,7 +15,7 @@ Domain values are repeated across routes, layout defaults, content, profile data
 - Use supported outcomes as the page's strongest visual material, with equivalent English and Spanish structure.
 - Keep the output static, resilient, accessible, and easy to verify without adding a frontend runtime.
 - Make the public CV maintainable enough that domain/contact changes can be verified in both visible and extracted text.
-- Separate repository completion from DNS, mailbox, and Vercel cutover so neither is falsely reported complete.
+- Separate repository completion from DNS, mailbox, and Cloudflare Workers cutover so neither is falsely reported complete.
 
 **Non-Goals:**
 
@@ -23,7 +23,7 @@ Domain values are repeated across routes, layout defaults, content, profile data
 - Rebuilding a general-purpose design system or moving reusable patterns back into HarpeBlue Signal.
 - Removing HarpeBlue Signal from the projects list or rewriting unsupported career/project claims.
 - Adding remote webfonts, large photographic assets, 3D/WebGL effects, or motion that competes with content.
-- Performing a commit, push, Vercel production mutation, DNS change, or mailbox provisioning without separate authorization and credentials.
+- Performing a commit, push, Cloudflare production mutation, DNS change, or mailbox provisioning without separate authorization and credentials.
 
 ## Decisions
 
@@ -117,17 +117,17 @@ Because the checked-in PDF is the only CV artifact and contains stale/extraneous
 
 Alternative considered: binary-level replacement. Rejected because PDF font encoding and metadata make it unreliable and non-maintainable.
 
-### 9. Treat deployment as a staged migration
+### 9. Treat Cloudflare deployment as a staged migration
 
 Repository implementation can change canonical intent and prepare assets, but production migration has separate gates:
 
 1. Complete code/content/CV changes, build, and inspect local English/Spanish desktop/mobile captures.
-2. Verify `hello@harpeblue.com` can receive mail.
-3. Configure `harpeblue.com`, `www.harpeblue.com`, `harpeblue.dev`, and `www.harpeblue.dev` on the Vercel project; choose apex `.com` as primary and permanent redirects preserving path/query.
-4. Point DNS, deploy from `main` only after owner-approved commit/push, then verify status codes, canonicals, discovery files, links, and both locale routes.
-5. Keep legacy-domain ownership/redirects active long enough for users and crawlers to migrate.
+2. Verify `hello@harpeblue.com` can receive mail through Cloudflare Email Routing; outbound sending is a separate optional capability.
+3. Deploy the static build from `main` to Cloudflare Workers, attach `harpeblue.com` as the production custom domain, and configure proxied `www.harpeblue.com` DNS plus a permanent path/query-preserving redirect to the apex.
+4. Verify status codes, certificates, canonicals, discovery files, public assets, links, both locale routes, and a real inbound message after propagation.
+5. Allow the intentionally non-renewed `harpeblue.dev` domain to expire without making it a production redirect dependency.
 
-Rollback is to restore the previous Vercel production deployment and old primary-domain routing while keeping the repository change available for correction. Domain/email readiness must be reported separately from code readiness.
+Rollback is to restore the previous known-good Cloudflare Worker deployment or production route while keeping the repository change and Email Routing DNS available for correction. Domain/email readiness must be reported separately from code readiness.
 
 ## Risks / Trade-offs
 
@@ -147,6 +147,6 @@ Rollback is to restore the previous Vercel production deployment and old primary
 3. Remove Signal imports/classes/dependency and delete confirmed-unused duplicate data modules.
 4. Add metadata, JSON-LD, discovery endpoints, favicon/social assets, and the auditable CV source/PDF.
 5. Run formatting/static audits, the Astro build, link/domain checks, PDF text checks, and desktop/mobile screenshots for both locales.
-6. Hand off the owner-controlled commit/push and the external mailbox/DNS/Vercel cutover checklist.
+6. Hand off the owner-controlled commit/push and the external mailbox/DNS/Cloudflare Workers cutover checklist, explicitly excluding the retired `.dev` domain.
 
 No unresolved design question is intentionally deferred; production credentials and DNS/mail readiness are execution prerequisites, not design choices.
